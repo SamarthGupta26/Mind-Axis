@@ -1,0 +1,44 @@
+"use client"
+
+import * as React from "react"
+import * as CheckboxPrimitive from "@radix-ui/react-checkbox"
+import { Check } from "lucide-react"
+
+import { cn } from "@/lib/utils"
+
+const Checkbox = React.forwardRef<
+  React.ElementRef<typeof CheckboxPrimitive.Root>,
+  React.ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root>
+>(({ className, ...props }, ref) => (
+  <CheckboxPrimitive.Root
+    ref={ref}
+    className={cn(
+      "peer h-4 w-4 shrink-0 rounded-sm border border-[var(--primary)] ring-offset-[var(--background)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-[var(--primary)] data-[state=checked]:text-[var(--primary-foreground)] transition-transform duration-200",
+      className
+    )}
+    {...props}
+    // Add interactive animation
+    onMouseDown={e => {
+      e.currentTarget.style.transform = 'scale(0.92)';
+    }}
+    onMouseUp={e => {
+      e.currentTarget.style.transform = 'scale(1)';
+    }}
+    onMouseEnter={e => {
+      e.currentTarget.style.transform = 'scale(1.08)';
+      e.currentTarget.style.transition = 'transform 0.2s cubic-bezier(0.4,0,0.2,1)';
+    }}
+    onMouseLeave={e => {
+      e.currentTarget.style.transform = 'scale(1)';
+    }}
+  >
+    <CheckboxPrimitive.Indicator
+      className={cn("flex items-center justify-center text-current")}
+    >
+      <Check className="h-4 w-4" />
+    </CheckboxPrimitive.Indicator>
+  </CheckboxPrimitive.Root>
+))
+Checkbox.displayName = CheckboxPrimitive.Root.displayName
+
+export { Checkbox }
