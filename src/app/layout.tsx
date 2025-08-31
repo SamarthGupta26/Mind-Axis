@@ -16,6 +16,9 @@ const PageTransition = lazy(() => import("@/components/ui/page-transition").then
 const LoadingScreen = lazy(() => import("@/components/ui/loading-screen").then(module => ({ default: module.LoadingScreen })));
 const OfflineFallback = lazy(() => import("@/components/ui/offline-fallback").then(module => ({ default: module.OfflineFallback })));
 const ScrollProgress = lazy(() => import("@/components/ui/scroll-progress").then(module => ({ default: module.ScrollProgress })));
+const ErrorBoundary = lazy(() => import("@/components/ui/error-boundary").then(module => ({ default: module.ErrorBoundary })));
+const AccessibilityPanel = lazy(() => import("@/components/ui/accessibility-panel").then(module => ({ default: module.AccessibilityPanel })));
+const PerformanceTracker = lazy(() => import("@/components/ui/performance-tracker").then(module => ({ default: module.PerformanceTracker })));
 
 // ...existing code...
 // ...existing code...
@@ -74,24 +77,36 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                   }} 
                 />
                 
+                {/* Skip to content link for accessibility */}
+                <a href="#main-content" className="skip-link">
+                  Skip to main content
+                </a>
+                
                 {/* Lazy loaded effects */}
                 <Suspense fallback={null}>
                   <CursorEffect />
                   <FloatingPanels />
                   <ScrollProgress />
+                  <OfflineFallback />
+                  <AccessibilityPanel />
+                  <PerformanceTracker />
                 </Suspense>
                 
-                {/* Main content */}
-                <div className="relative z-40 flex flex-col min-h-screen">
+                {/* Main content with Error Boundary */}
+                <div className="relative z-40 sticky-footer-layout">
                   <Header />
-                  <main className="flex-1 pt-24">
+                  <main id="main-content" className="sticky-footer-content pt-20 lg:pt-24 px-2 sm:px-4 md:px-6 lg:px-8">
                     <Suspense fallback={<div className="flex items-center justify-center min-h-[50vh]"><div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div></div>}>
-                      <PageTransition>
-                        {children}
-                      </PageTransition>
+                      <ErrorBoundary>
+                        <PageTransition>
+                          <div className="w-full max-w-7xl mx-auto flex flex-col items-center justify-center">
+                            {children}
+                          </div>
+                        </PageTransition>
+                      </ErrorBoundary>
                     </Suspense>
                   </main>
-                  <div className="mt-auto">
+                  <div className="sticky-footer">
                     <Footer />
                   </div>
                 </div>

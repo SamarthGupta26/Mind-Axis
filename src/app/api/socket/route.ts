@@ -3,13 +3,13 @@ import { NextRequest, NextResponse } from 'next/server';
 // In-memory storage for development
 const rooms = new Map();
 
-export async function GET(_req: NextRequest) {
+export async function GET() {
   return NextResponse.json({ 
     message: 'Socket.IO server endpoint'
   });
 }
 
-export async function POST(_req: NextRequest) {
+export async function POST() {
   try {
     // For development, we'll use a simplified approach
     // In production, you'd want to use a proper WebSocket server setup

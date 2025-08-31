@@ -33,12 +33,12 @@ export function ModeSelector() {
     <motion.div
       initial={{ y: 10, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      className="flex items-center justify-center p-1 rounded-full bg-background/50 backdrop-blur-sm border shadow-lg w-86 mx-auto mb-6 space-x-1"
+      className="flex items-center justify-center p-1 rounded-full bg-background/50 backdrop-blur-sm border shadow-lg w-full max-w-xs sm:max-w-sm md:max-w-md mx-auto mb-4 sm:mb-6 space-x-0.5 sm:space-x-1"
     >
       {modes.map(({ id, label, activeColor, textColor }) => (
         <motion.div
           key={id}
-          className="relative"
+          className="relative flex-1"
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
         >
@@ -46,11 +46,11 @@ export function ModeSelector() {
             variant="ghost"
             onClick={() => setMode(id)}
             className={cn(
-              "relative z-10 rounded-full px-6 transition-colors",
+              "relative z-10 rounded-full px-2 sm:px-4 md:px-6 py-1.5 sm:py-2 transition-colors text-xs sm:text-sm md:text-base w-full",
               currentMode === id && textColor
             )}
           >
-            {label}
+            <span className="truncate">{label}</span>
           </Button>
           {currentMode === id && (
             <motion.div

@@ -66,15 +66,15 @@ export function Quotes() {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
-      className="text-center space-y-2 bg-background/50 backdrop-blur-sm rounded-xl p-6 border shadow-lg"
+      className="text-center space-y-1 sm:space-y-2 bg-background/50 backdrop-blur-sm rounded-xl p-3 sm:p-4 md:p-6 border shadow-lg max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg mx-auto"
     >
       <motion.p 
-        className="text-lg font-medium text-muted-foreground italic"
+        className="text-sm sm:text-base md:text-lg font-medium text-muted-foreground italic leading-relaxed"
       >
         &ldquo;{currentQuote.text}&rdquo;
       </motion.p>
       <motion.p 
-        className="text-sm text-muted-foreground/80"
+        className="text-xs sm:text-sm text-muted-foreground/80"
       >
         — {currentQuote.author}
       </motion.p>

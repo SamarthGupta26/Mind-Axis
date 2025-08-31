@@ -117,34 +117,34 @@ export function ChatPanel({
   const messageGroups = groupMessagesByTime(messages);
 
   return (
-    <div className="liquid-card rounded-xl p-6 h-full flex flex-col">
+    <div className="liquid-card rounded-xl p-3 sm:p-4 md:p-6 h-full flex flex-col">
       {/* Header */}
-      <div className="flex items-center justify-between mb-6">
-        <h2 className="text-lg font-semibold flex items-center gap-2">
+      <div className="flex items-center justify-between mb-3 sm:mb-4 md:mb-6">
+        <h2 className="text-base sm:text-lg font-semibold flex items-center gap-2">
           💬 Chat
         </h2>
-        <Button variant="ghost" size="icon" className="h-8 w-8">
-          <MoreHorizontal className="w-4 h-4" />
+        <Button variant="ghost" size="icon" className="h-6 w-6 sm:h-8 sm:w-8">
+          <MoreHorizontal className="w-3 h-3 sm:w-4 sm:h-4" />
         </Button>
       </div>
 
       {/* Messages */}
-      <div className="flex-1 overflow-y-auto space-y-4 pr-2 -mr-2">
+      <div className="flex-1 overflow-y-auto space-y-2 sm:space-y-4 pr-1 sm:pr-2 -mr-1 sm:-mr-2">
         {messageGroups.length === 0 ? (
           <div className="flex-1 flex items-center justify-center">
             <div className="text-center text-muted-foreground">
-              <div className="text-4xl mb-2">💬</div>
-              <p>No messages yet.</p>
-              <p className="text-sm mt-1">Start the conversation!</p>
+              <div className="text-2xl sm:text-4xl mb-2">💬</div>
+              <p className="text-sm sm:text-base">No messages yet.</p>
+              <p className="text-xs sm:text-sm mt-1">Start the conversation!</p>
             </div>
           </div>
         ) : (
           messageGroups.map((group, groupIndex) => (
-            <div key={groupIndex} className="space-y-2">
+            <div key={groupIndex} className="space-y-1 sm:space-y-2">
               {/* Time divider */}
-              <div className="flex items-center gap-3 my-4">
+              <div className="flex items-center gap-2 sm:gap-3 my-2 sm:my-4">
                 <div className="flex-1 h-px bg-border/50" />
-                <span className="text-xs text-muted-foreground px-2 py-1 bg-background rounded-full border">
+                <span className="text-xs text-muted-foreground px-1.5 sm:px-2 py-0.5 sm:py-1 bg-background rounded-full border">
                   {group.time}
                 </span>
                 <div className="flex-1 h-px bg-border/50" />
@@ -166,7 +166,7 @@ export function ChatPanel({
                         transition={{ duration: 0.2 }}
                         className="text-center"
                       >
-                        <span className="text-xs text-muted-foreground bg-muted/50 px-3 py-1 rounded-full">
+                        <span className="text-xs text-muted-foreground bg-muted/50 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full">
                           {msg.text}
                         </span>
                       </motion.div>
@@ -182,17 +182,17 @@ export function ChatPanel({
                       transition={{ duration: 0.2 }}
                       className={`flex ${isOwnMessage ? "justify-end" : "justify-start"}`}
                     >
-                      <div className={`max-w-[80%] ${isOwnMessage ? "order-2" : "order-1"}`}>
+                      <div className={`max-w-[85%] sm:max-w-[80%] ${isOwnMessage ? "order-2" : "order-1"}`}>
                         {!isOwnMessage && (
-                          <div className="text-xs text-muted-foreground mb-1 px-1">
+                          <div className="text-xs text-muted-foreground mb-0.5 sm:mb-1 px-1">
                             {msg.userName}
                           </div>
                         )}
                         <div
-                          className={`p-3 rounded-2xl break-words ${
+                          className={`p-2 sm:p-3 rounded-2xl break-words text-sm sm:text-base ${
                             isOwnMessage
-                              ? "bg-primary text-primary-foreground ml-4"
-                              : "bg-muted text-muted-foreground mr-4"
+                              ? "bg-primary text-primary-foreground ml-2 sm:ml-4"
+                              : "bg-muted text-muted-foreground mr-2 sm:mr-4"
                           }`}
                         >
                           <div className="whitespace-pre-wrap">{msg.text}</div>
@@ -217,7 +217,7 @@ export function ChatPanel({
               transition={{ duration: 0.2 }}
               className="flex justify-start"
             >
-              <div className="bg-muted text-muted-foreground p-3 rounded-2xl mr-4">
+              <div className="bg-muted text-muted-foreground p-2 sm:p-3 rounded-2xl mr-2 sm:mr-4">
                 <div className="flex items-center gap-2">
                   <span className="text-xs">{user.userName} is typing</span>
                   <div className="flex gap-1">
@@ -235,8 +235,8 @@ export function ChatPanel({
       </div>
 
       {/* Message Input */}
-      <div className="mt-4 border-t border-border/50 pt-4">
-        <div className="flex gap-3 items-end">
+      <div className="mt-3 sm:mt-4 border-t border-border/50 pt-3 sm:pt-4">
+        <div className="flex gap-2 sm:gap-3 items-end">
           <div className="flex-1 relative">
             <textarea
               ref={inputRef}
@@ -244,17 +244,17 @@ export function ChatPanel({
               onChange={handleInputChange}
               onKeyPress={handleKeyPress}
               placeholder="Type a message... (Enter to send, Shift+Enter for new line)"
-              className="w-full p-3 pr-12 rounded-xl border border-border/50 focus:border-primary focus:ring-2 focus:ring-primary/20 resize-none bg-background/50 backdrop-blur-sm transition-all duration-200 min-h-[44px] max-h-32"
+              className="w-full p-2 sm:p-3 pr-10 sm:pr-12 rounded-xl border border-border/50 focus:border-primary focus:ring-2 focus:ring-primary/20 resize-none bg-background/50 backdrop-blur-sm transition-all duration-200 min-h-[36px] sm:min-h-[44px] max-h-24 sm:max-h-32 text-sm sm:text-base"
               rows={1}
               style={{
                 height: "auto",
-                minHeight: "44px",
-                maxHeight: "128px",
+                minHeight: "36px",
+                maxHeight: "96px",
               }}
               onInput={(e) => {
                 const target = e.target as HTMLTextAreaElement;
                 target.style.height = "auto";
-                target.style.height = `${Math.min(target.scrollHeight, 128)}px`;
+                target.style.height = `${Math.min(target.scrollHeight, window.innerWidth < 640 ? 96 : 128)}px`;
               }}
             />
           </div>
@@ -263,9 +263,9 @@ export function ChatPanel({
             onClick={handleSend}
             disabled={!message.trim()}
             size="icon"
-            className="h-11 w-11 rounded-xl bg-primary hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
+            className="h-9 w-9 sm:h-11 sm:w-11 rounded-xl bg-primary hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
           >
-            <Send className="w-4 h-4" />
+            <Send className="w-3 h-3 sm:w-4 sm:h-4" />
           </Button>
         </div>
       </div>

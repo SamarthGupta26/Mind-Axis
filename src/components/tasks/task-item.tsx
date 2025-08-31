@@ -85,7 +85,9 @@ export function TaskItem({ task }: TaskItemProps) {
               updatedAt: task.updatedAt,
             }} 
             mode="edit" 
-            onClose={() => {}} 
+            onClose={() => {
+              // Edit form closed
+            }} 
           />
           <Dialog open={showConfirmDelete} onOpenChange={setShowConfirmDelete}>
             <DialogTrigger asChild>

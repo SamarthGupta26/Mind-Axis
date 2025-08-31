@@ -220,10 +220,10 @@ function StudyMethodQuiz() {
 
   if (!mounted) {
     return (
-      <div className="liquid-card p-6">
-        <div className="animate-pulse space-y-4">
-          <div className="h-6 bg-primary/10 rounded w-3/4"></div>
-          <div className="h-20 bg-primary/5 rounded"></div>
+      <div className="liquid-card p-3 sm:p-4 md:p-6">
+        <div className="animate-pulse space-y-3 sm:space-y-4">
+          <div className="h-5 sm:h-6 bg-primary/10 rounded w-3/4"></div>
+          <div className="h-16 sm:h-20 bg-primary/5 rounded"></div>
         </div>
       </div>
     );
@@ -234,25 +234,25 @@ function StudyMethodQuiz() {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.2 }}
-      className="liquid-card p-6"
+      className="liquid-card p-3 sm:p-4 md:p-6"
     >
-      <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
-        <HelpCircle className="text-primary w-5 h-5" />
+      <h3 className="text-base sm:text-lg md:text-xl font-bold mb-3 sm:mb-4 flex items-center gap-1 sm:gap-2">
+        <HelpCircle className="text-primary w-4 h-4 sm:w-5 sm:h-5" />
         Study Method Discovery Quiz
       </h3>
 
       {!showResults ? (
-        <div className="space-y-6">
+        <div className="space-y-4 sm:space-y-6">
           {/* Progress Bar */}
-          <div className="w-full bg-primary/10 rounded-full h-2">
+          <div className="w-full bg-primary/10 rounded-full h-1.5 sm:h-2">
             <div 
-              className="bg-primary h-2 rounded-full transition-all duration-500 ease-out"
+              className="bg-primary h-1.5 sm:h-2 rounded-full transition-all duration-500 ease-out"
               style={{ width: `${((currentQuestion + 1) / questions.length) * 100}%` }}
             />
           </div>
 
           {/* Question Counter */}
-          <div className="text-sm text-muted-foreground text-center">
+          <div className="text-xs sm:text-sm text-muted-foreground text-center">
             Question {currentQuestion + 1} of {questions.length}
           </div>
 
@@ -264,24 +264,24 @@ function StudyMethodQuiz() {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -20 }}
               transition={{ duration: 0.3 }}
-              className="space-y-4"
+              className="space-y-3 sm:space-y-4"
             >
-              <h4 className="text-lg font-semibold text-center">
+              <h4 className="text-base sm:text-lg font-semibold text-center">
                 {questions[currentQuestion].question}
               </h4>
 
-              <div className="grid gap-3">
+              <div className="grid gap-2 sm:gap-3">
                 {questions[currentQuestion].options.map((option, index) => (
                   <motion.button
                     key={index}
                     onClick={() => handleAnswer(index)}
-                    className="p-4 text-left rounded-lg border border-border hover:border-primary/50 hover:bg-primary/5 transition-all duration-300 interactive-glow"
+                    className="p-3 sm:p-4 text-left rounded-lg border border-border hover:border-primary/50 hover:bg-primary/5 transition-all duration-300 interactive-glow text-sm sm:text-base"
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                   >
-                    <div className="flex items-center gap-3">
-                      <div className="w-6 h-6 rounded-full border-2 border-primary/30 flex items-center justify-center">
-                        <div className="w-2 h-2 rounded-full bg-primary/50" />
+                    <div className="flex items-center gap-2 sm:gap-3">
+                      <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full border-2 border-primary/30 flex items-center justify-center">
+                        <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-primary/50" />
                       </div>
                       <span>{option}</span>
                     </div>
@@ -296,67 +296,67 @@ function StudyMethodQuiz() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="space-y-6"
+          className="space-y-4 sm:space-y-6"
         >
           {results && (
             <>
               {/* Results Header */}
-              <div className="text-center space-y-2">
-                <div className="flex items-center justify-center gap-2 text-green-600">
-                  <CheckCircle className="w-6 h-6" />
-                  <span className="font-semibold">Quiz Complete!</span>
+              <div className="text-center space-y-1 sm:space-y-2">
+                <div className="flex items-center justify-center gap-1 sm:gap-2 text-green-600">
+                  <CheckCircle className="w-5 h-5 sm:w-6 sm:h-6" />
+                  <span className="text-sm sm:text-base font-semibold">Quiz Complete!</span>
                 </div>
-                <h4 className="text-2xl font-bold text-primary">{results.primaryMethod}</h4>
-                <p className="text-muted-foreground">{results.description}</p>
+                <h4 className="text-lg sm:text-xl md:text-2xl font-bold text-primary">{results.primaryMethod}</h4>
+                <p className="text-xs sm:text-sm md:text-base text-muted-foreground">{results.description}</p>
               </div>
 
               {/* Time Preference */}
-              <div className="liquid-card bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-4">
-                <h5 className="font-semibold text-blue-800 dark:text-blue-200 mb-2 flex items-center gap-2">
-                  <Clock className="w-4 h-4" />
+              <div className="liquid-card bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-3 sm:p-4">
+                <h5 className="text-sm sm:text-base font-semibold text-blue-800 dark:text-blue-200 mb-1 sm:mb-2 flex items-center gap-1 sm:gap-2">
+                  <Clock className="w-3 h-3 sm:w-4 sm:h-4" />
                   Your Peak Time: {results.timePreference}
                 </h5>
-                <p className="text-sm text-blue-700 dark:text-blue-300">{results.timeRecommendation}</p>
+                <p className="text-xs sm:text-sm text-blue-700 dark:text-blue-300">{results.timeRecommendation}</p>
               </div>
 
               {/* Session Preference */}
-              <div className="liquid-card bg-purple-50 dark:bg-purple-950/20 border border-purple-200 dark:border-purple-800 p-4">
-                <h5 className="font-semibold text-purple-800 dark:text-purple-200 mb-2 flex items-center gap-2">
-                  <Timer className="w-4 h-4" />
+              <div className="liquid-card bg-purple-50 dark:bg-purple-950/20 border border-purple-200 dark:border-purple-800 p-3 sm:p-4">
+                <h5 className="text-sm sm:text-base font-semibold text-purple-800 dark:text-purple-200 mb-1 sm:mb-2 flex items-center gap-1 sm:gap-2">
+                  <Timer className="w-3 h-3 sm:w-4 sm:h-4" />
                   Optimal Session Style
                 </h5>
-                <p className="text-sm text-purple-700 dark:text-purple-300">{results.sessionRecommendation}</p>
+                <p className="text-xs sm:text-sm text-purple-700 dark:text-purple-300">{results.sessionRecommendation}</p>
               </div>
 
               {/* Personalized Recommendations */}
-              <div className="space-y-3">
-                <h5 className="font-semibold flex items-center gap-2">
-                  <Lightbulb className="w-4 h-4 text-primary" />
+              <div className="space-y-2 sm:space-y-3">
+                <h5 className="text-sm sm:text-base font-semibold flex items-center gap-1 sm:gap-2">
+                  <Lightbulb className="w-3 h-3 sm:w-4 sm:h-4 text-primary" />
                   Personalized Study Tips
                 </h5>
-                <div className="grid gap-2">
+                <div className="grid gap-1.5 sm:gap-2">
                   {results.recommendations.map((tip, index) => (
-                    <div key={index} className="flex items-start gap-3 p-3 liquid-card bg-primary/5 border border-primary/20">
-                      <Star className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
-                      <span className="text-sm">{tip}</span>
+                    <div key={index} className="flex items-start gap-2 sm:gap-3 p-2 sm:p-3 liquid-card bg-primary/5 border border-primary/20">
+                      <Star className="w-3 h-3 sm:w-4 sm:h-4 text-primary mt-0.5 flex-shrink-0" />
+                      <span className="text-xs sm:text-sm">{tip}</span>
                     </div>
                   ))}
                 </div>
               </div>
 
               {/* Action Buttons */}
-              <div className="flex gap-3">
+              <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
                 <Button 
                   onClick={resetQuiz} 
                   variant="outline" 
-                  className="flex items-center gap-2 interactive-glow"
+                  className="flex items-center gap-1 sm:gap-2 interactive-glow text-xs sm:text-sm"
                 >
-                  <RotateCw className="w-4 h-4" />
+                  <RotateCw className="w-3 h-3 sm:w-4 sm:h-4" />
                   Retake Quiz
                 </Button>
                 <Link href="/focus">
-                  <Button className="flex items-center gap-2 interactive-glow">
-                    <ArrowRight className="w-4 h-4" />
+                  <Button className="flex items-center gap-1 sm:gap-2 interactive-glow w-full sm:w-auto text-xs sm:text-sm">
+                    <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4" />
                     Start Studying
                   </Button>
                 </Link>
@@ -524,24 +524,24 @@ function StudySessionPlanner() {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="liquid-card p-6"
+      className="liquid-card p-3 sm:p-4 md:p-6"
     >
-      <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
-        <Timer className="text-primary w-5 h-5" />
+      <h3 className="text-base sm:text-lg md:text-xl font-bold mb-3 sm:mb-4 flex items-center gap-1 sm:gap-2">
+        <Timer className="text-primary w-4 h-4 sm:w-5 sm:h-5" />
         Smart Session Planner
       </h3>
 
       {/* Active Session Timer */}
       {activeSession && (
-        <div className="mb-6 p-4 liquid-card bg-primary/5 border border-primary/20">
+        <div className="mb-4 sm:mb-6 p-3 sm:p-4 liquid-card bg-primary/5 border border-primary/20">
           <div className="text-center">
-            <div className="text-3xl font-bold text-primary mb-2">{formatTime(timeLeft)}</div>
-            <div className="text-sm text-muted-foreground mb-3">
+            <div className="text-2xl sm:text-3xl font-bold text-primary mb-1 sm:mb-2">{formatTime(timeLeft)}</div>
+            <div className="text-xs sm:text-sm text-muted-foreground mb-2 sm:mb-3">
               {sessions.find(s => s.id === activeSession)?.subject}
             </div>
-            <div className="flex justify-center gap-2">
-              <Button onClick={toggleTimer} size="sm" className="interactive-glow">
-                {isRunning ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
+            <div className="flex justify-center gap-1.5 sm:gap-2">
+              <Button onClick={toggleTimer} size="sm" className="interactive-glow text-xs sm:text-sm">
+                {isRunning ? <Pause className="w-3 h-3 sm:w-4 sm:h-4" /> : <Play className="w-3 h-3 sm:w-4 sm:h-4" />}
               </Button>
               <Button 
                 onClick={() => {
@@ -551,7 +551,7 @@ function StudySessionPlanner() {
                 }} 
                 variant="outline" 
                 size="sm"
-                className="interactive-glow"
+                className="interactive-glow text-xs sm:text-sm"
               >
                 Stop
               </Button>
@@ -561,8 +561,8 @@ function StudySessionPlanner() {
       )}
 
       {/* Add New Session */}
-      <div className="mb-6 p-3 sm:p-4 liquid-card bg-background/30">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-3">
+      <div className="mb-4 sm:mb-6 p-2 sm:p-3 md:p-4 liquid-card bg-background/30">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3 mb-2 sm:mb-3">
           <div className="relative">
             <Input
               placeholder="Subject"
@@ -575,7 +575,7 @@ function StudySessionPlanner() {
                   duration: getOptimalDuration(value)
                 });
               }}
-              className="text-sm"
+              className="text-xs sm:text-sm"
               list="subject-suggestions"
             />
             <datalist id="subject-suggestions">
@@ -591,19 +591,19 @@ function StudySessionPlanner() {
             max="120"
             value={newSession.duration}
             onChange={(e) => setNewSession({ ...newSession, duration: Number(e.target.value) })}
-            className="text-sm"
+            className="text-xs sm:text-sm"
           />
           <select
             value={newSession.type}
             onChange={(e) => setNewSession({ ...newSession, type: e.target.value as 'study' | 'review' | 'practice' | 'break' })}
-            className="px-3 py-2 rounded-md border border-border bg-background text-sm transition-all duration-300 hover:border-primary/40 focus:border-primary/60"
+            className="px-2 sm:px-3 py-1.5 sm:py-2 rounded-md border border-border bg-background text-xs sm:text-sm transition-all duration-300 hover:border-primary/40 focus:border-primary/60"
           >
             <option value="study">Study</option>
             <option value="review">Review</option>
             <option value="practice">Practice</option>
             <option value="break">Break</option>
           </select>
-          <Button onClick={addSession} className="flex items-center gap-1 text-sm interactive-glow">
+          <Button onClick={addSession} className="flex items-center gap-1 text-xs sm:text-sm interactive-glow">
             <PlusCircle className="w-3 h-3 sm:w-4 sm:h-4" />
             Add
           </Button>
@@ -619,38 +619,41 @@ function StudySessionPlanner() {
       {/* Session List */}
       <div className="space-y-2">
         {sessions.length === 0 ? (
-          <div className="text-center py-8 text-muted-foreground">
-            <Timer className="w-12 h-12 mx-auto mb-3 text-primary/30" />
-            <p>No study sessions planned yet.</p>
-            <p className="text-sm">Add your first session above!</p>
+          <div className="text-center py-6 sm:py-8 text-muted-foreground">
+            <Timer className="w-10 h-10 sm:w-12 sm:h-12 mx-auto mb-2 sm:mb-3 text-primary/30" />
+            <p className="text-sm sm:text-base">No study sessions planned yet.</p>
+            <p className="text-xs sm:text-sm">Add your first session above!</p>
           </div>
         ) : (
           sessions.map((session) => (
             <div
               key={session.id}
-              className={`p-3 rounded-lg border flex items-center justify-between ${
+              className={`p-2 sm:p-3 rounded-lg border flex items-center justify-between transition-all duration-300 ${
                 session.completed 
                   ? 'bg-green-50 dark:bg-green-950/20 border-green-200 dark:border-green-800' 
-                  : 'bg-background border-border'
+                  : 'bg-background border-border hover:border-primary/30'
               }`}
             >
-              <div className="flex items-center gap-3">
-                {getSessionIcon(session.type)}
-                <div>
-                  <div className="font-medium">{session.subject}</div>
-                  <div className="text-sm text-muted-foreground">
+              <div className="flex items-center gap-2 sm:gap-3 flex-1 min-w-0">
+                <div className="flex-shrink-0">
+                  {getSessionIcon(session.type)}
+                </div>
+                <div className="min-w-0 flex-1">
+                  <div className="font-medium text-sm sm:text-base truncate">{session.subject}</div>
+                  <div className="text-xs sm:text-sm text-muted-foreground">
                     {session.duration} min • {session.type}
                   </div>
                 </div>
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-1 sm:gap-2 flex-shrink-0">
                 {session.completed ? (
-                  <CheckCircle2 className="w-5 h-5 text-green-600" />
+                  <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-green-600" />
                 ) : (
                   <Button
                     onClick={() => startSession(session.id)}
                     size="sm"
                     disabled={activeSession !== null}
+                    className="interactive-glow text-xs sm:text-sm"
                   >
                     Start
                   </Button>
@@ -840,67 +843,67 @@ function StudyInsightsDashboard({ tasks }: { tasks: Task[] }) {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="liquid-card p-6"
+      className="liquid-card p-3 sm:p-4 md:p-6"
     >
-      <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
-        <BarChart3 className="text-primary w-5 h-5" />
+      <h3 className="text-lg sm:text-xl font-bold mb-3 sm:mb-4 flex items-center gap-2">
+        <BarChart3 className="text-primary w-4 h-4 sm:w-5 sm:h-5" />
         Smart Study Analytics
       </h3>
       
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mb-6">
-        <div className="liquid-card bg-primary/5 p-3 sm:p-4 text-center border border-primary/20">
-          <div className="text-xl sm:text-2xl font-bold text-primary">{insights.completedTasks}</div>
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3 md:gap-4 mb-4 sm:mb-6">
+        <div className="liquid-card bg-primary/5 p-2 sm:p-3 md:p-4 text-center border border-primary/20">
+          <div className="text-lg sm:text-xl lg:text-2xl font-bold text-primary">{insights.completedTasks}</div>
           <div className="text-xs sm:text-sm text-muted-foreground">Completed</div>
         </div>
-        <div className="liquid-card bg-primary/5 p-3 sm:p-4 text-center border border-primary/20">
-          <div className="text-xl sm:text-2xl font-bold text-primary">{insights.pendingTasks}</div>
+        <div className="liquid-card bg-primary/5 p-2 sm:p-3 md:p-4 text-center border border-primary/20">
+          <div className="text-lg sm:text-xl lg:text-2xl font-bold text-primary">{insights.pendingTasks}</div>
           <div className="text-xs sm:text-sm text-muted-foreground">Pending</div>
         </div>
-        <div className="liquid-card bg-primary/5 p-3 sm:p-4 text-center border border-primary/20">
-          <div className="text-xl sm:text-2xl font-bold text-primary">{Math.round(insights.completionRate)}%</div>
+        <div className="liquid-card bg-primary/5 p-2 sm:p-3 md:p-4 text-center border border-primary/20">
+          <div className="text-lg sm:text-xl lg:text-2xl font-bold text-primary">{Math.round(insights.completionRate)}%</div>
           <div className="text-xs sm:text-sm text-muted-foreground">Success Rate</div>
         </div>
-        <div className="liquid-card bg-primary/5 p-3 sm:p-4 text-center border border-primary/20">
-          <div className="text-xl sm:text-2xl font-bold text-primary">{insights.todayTasks}</div>
+        <div className="liquid-card bg-primary/5 p-2 sm:p-3 md:p-4 text-center border border-primary/20">
+          <div className="text-lg sm:text-xl lg:text-2xl font-bold text-primary">{insights.todayTasks}</div>
           <div className="text-xs sm:text-sm text-muted-foreground">Today&apos;s Tasks</div>
         </div>
       </div>
       
-      <div className="space-y-4">
+      <div className="space-y-3 sm:space-y-4">
         {/* Weekly streak insight */}
-        <div className="flex items-start gap-3 p-4 liquid-card bg-gradient-to-r from-green-50 to-blue-50 dark:from-green-950/20 dark:to-blue-950/20 border border-green-200 dark:border-green-800">
-          <TrendingUp className="w-5 h-5 text-green-600 mt-0.5" />
-          <div>
-            <div className="font-medium text-green-800 dark:text-green-200">Weekly Progress</div>
-            <div className="text-sm text-green-700 dark:text-green-300">{insights.weeklyInsight}</div>
+        <div className="flex items-start gap-2 sm:gap-3 p-3 sm:p-4 liquid-card bg-gradient-to-r from-green-50 to-blue-50 dark:from-green-950/20 dark:to-blue-950/20 border border-green-200 dark:border-green-800">
+          <TrendingUp className="w-4 h-4 sm:w-5 sm:h-5 text-green-600 mt-0.5 flex-shrink-0" />
+          <div className="min-w-0">
+            <div className="font-medium text-green-800 dark:text-green-200 text-sm sm:text-base">Weekly Progress</div>
+            <div className="text-xs sm:text-sm text-green-700 dark:text-green-300">{insights.weeklyInsight}</div>
           </div>
         </div>
 
         {/* Smart time insight */}
-        <div className="flex items-start gap-3 p-4 liquid-card bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-950/20 dark:to-purple-950/20 border border-blue-200 dark:border-blue-800">
-          <Clock className="w-5 h-5 text-blue-600 mt-0.5" />
-          <div>
-            <div className="font-medium text-blue-800 dark:text-blue-200">Smart Time Insight</div>
-            <div className="text-sm text-blue-700 dark:text-blue-300">{insights.timeInsight}</div>
+        <div className="flex items-start gap-2 sm:gap-3 p-3 sm:p-4 liquid-card bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-950/20 dark:to-purple-950/20 border border-blue-200 dark:border-blue-800">
+          <Clock className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600 mt-0.5 flex-shrink-0" />
+          <div className="min-w-0">
+            <div className="font-medium text-blue-800 dark:text-blue-200 text-sm sm:text-base">Smart Time Insight</div>
+            <div className="text-xs sm:text-sm text-blue-700 dark:text-blue-300">{insights.timeInsight}</div>
           </div>
         </div>
         
         {/* Personalized recommendation */}
-        <div className="flex items-start gap-3 p-4 liquid-card bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-950/20 dark:to-pink-950/20 border border-purple-200 dark:border-purple-800">
-          <Lightbulb className="w-5 h-5 text-purple-600 mt-0.5" />
-          <div>
-            <div className="font-medium text-purple-800 dark:text-purple-200">Personalized Tip</div>
-            <div className="text-sm text-purple-700 dark:text-purple-300">{insights.recommendation}</div>
+        <div className="flex items-start gap-2 sm:gap-3 p-3 sm:p-4 liquid-card bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-950/20 dark:to-pink-950/20 border border-purple-200 dark:border-purple-800">
+          <Lightbulb className="w-4 h-4 sm:w-5 sm:h-5 text-purple-600 mt-0.5 flex-shrink-0" />
+          <div className="min-w-0">
+            <div className="font-medium text-purple-800 dark:text-purple-200 text-sm sm:text-base">Personalized Tip</div>
+            <div className="text-xs sm:text-sm text-purple-700 dark:text-purple-300">{insights.recommendation}</div>
           </div>
         </div>
         
         {/* Priority alert */}
         {insights.highPriorityTasks > 0 && (
-          <div className="flex items-start gap-3 p-4 liquid-card bg-gradient-to-r from-red-50 to-orange-50 dark:from-red-950/20 dark:to-orange-950/20 border border-red-200 dark:border-red-800">
-            <AlertCircle className="w-5 h-5 text-red-600 mt-0.5" />
-            <div>
-              <div className="font-medium text-red-800 dark:text-red-200">Priority Alert</div>
-              <div className="text-sm text-red-700 dark:text-red-300">
+          <div className="flex items-start gap-2 sm:gap-3 p-3 sm:p-4 liquid-card bg-gradient-to-r from-red-50 to-orange-50 dark:from-red-950/20 dark:to-orange-950/20 border border-red-200 dark:border-red-800">
+            <AlertCircle className="w-4 h-4 sm:w-5 sm:h-5 text-red-600 mt-0.5 flex-shrink-0" />
+            <div className="min-w-0">
+              <div className="font-medium text-red-800 dark:text-red-200 text-sm sm:text-base">Priority Alert</div>
+              <div className="text-xs sm:text-sm text-red-700 dark:text-red-300">
                 You have {insights.highPriorityTasks} high-priority task{insights.highPriorityTasks !== 1 ? 's' : ''} waiting. 
                 Consider tackling {insights.highPriorityTasks === 1 ? 'it' : 'them'} during your most productive hours.
               </div>
@@ -910,11 +913,11 @@ function StudyInsightsDashboard({ tasks }: { tasks: Task[] }) {
 
         {/* Recent activity */}
         {insights.recentlyCompleted > 0 && (
-          <div className="flex items-start gap-3 p-4 liquid-card bg-gradient-to-r from-emerald-50 to-green-50 dark:from-emerald-950/20 dark:to-green-950/20 border border-emerald-200 dark:border-emerald-800">
-            <Award className="w-5 h-5 text-emerald-600 mt-0.5" />
-            <div>
-              <div className="font-medium text-emerald-800 dark:text-emerald-200">Recent Achievement</div>
-              <div className="text-sm text-emerald-700 dark:text-emerald-300">
+          <div className="flex items-start gap-2 sm:gap-3 p-3 sm:p-4 liquid-card bg-gradient-to-r from-emerald-50 to-green-50 dark:from-emerald-950/20 dark:to-green-950/20 border border-emerald-200 dark:border-emerald-800">
+            <Award className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-600 mt-0.5 flex-shrink-0" />
+            <div className="min-w-0">
+              <div className="font-medium text-emerald-800 dark:text-emerald-200 text-sm sm:text-base">Recent Achievement</div>
+              <div className="text-xs sm:text-sm text-emerald-700 dark:text-emerald-300">
                 Great momentum! You&apos;ve completed {insights.recentlyCompleted} task{insights.recentlyCompleted !== 1 ? 's' : ''} in the last 24 hours.
               </div>
             </div>
@@ -1414,16 +1417,16 @@ function QuickStudyTools() {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="liquid-card p-6"
+      className="liquid-card p-3 sm:p-4 md:p-6"
     >
-      <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
-        <Zap className="text-primary w-5 h-5" />
+      <h3 className="text-lg sm:text-xl font-bold mb-3 sm:mb-4 flex items-center gap-2">
+        <Zap className="text-primary w-4 h-4 sm:w-5 sm:h-5" />
         Smart Study Tools
       </h3>
 
       {/* Contextual message */}
-      <div className="mb-4 p-3 liquid-card bg-primary/5 border border-primary/20">
-        <div className="text-sm font-medium text-primary">
+      <div className="mb-3 sm:mb-4 p-2 sm:p-3 liquid-card bg-primary/5 border border-primary/20">
+        <div className="text-xs sm:text-sm font-medium text-primary">
           {getContextualMessage()}
         </div>
       </div>
@@ -1440,7 +1443,7 @@ function QuickStudyTools() {
               transition={{ delay: i * 0.1 }}
             >
               <Link href={tool.link}>
-                <div className={`p-3 sm:p-4 rounded-lg border transition-all duration-300 cursor-pointer ${tool.color} ${
+                <div className={`p-2 sm:p-3 md:p-4 rounded-lg border transition-all duration-300 cursor-pointer ${tool.color} ${
                   isTopRecommendation 
                     ? 'ring-2 ring-primary/30 hover:ring-primary/50 hover:scale-105' 
                     : 'hover:scale-105'
@@ -1448,10 +1451,10 @@ function QuickStudyTools() {
                   <div className="flex items-start gap-2 sm:gap-3">
                     <IconComponent className="w-4 h-4 sm:w-5 sm:h-5 mt-1 flex-shrink-0" />
                     <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2 mb-1">
-                        <h4 className="font-semibold text-sm sm:text-base">{tool.title}</h4>
+                      <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2 mb-1">
+                        <h4 className="font-semibold text-sm sm:text-base truncate">{tool.title}</h4>
                         {isTopRecommendation && (
-                          <span className="bg-primary text-primary-foreground text-xs px-2 py-0.5 rounded-full">
+                          <span className="bg-primary text-primary-foreground text-xs px-2 py-0.5 rounded-full self-start sm:self-auto">
                             Top Pick
                           </span>
                         )}
@@ -1467,7 +1470,7 @@ function QuickStudyTools() {
                             </span>
                           ))}
                         </div>
-                        <p className="text-xs opacity-70">{tool.personalizedTip}</p>
+                        <p className="text-xs opacity-70 break-words">{tool.personalizedTip}</p>
                       </div>
                       
                       <div className="text-xs font-medium flex items-center gap-1">
@@ -1513,19 +1516,19 @@ export default function StudyCompanionPage() {
           initial={{ opacity: 0, y: -30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ type: "spring", stiffness: 120, damping: 18 }}
-          className="w-full max-w-5xl mx-auto text-center mb-6 sm:mb-8"
+          className="w-full max-w-5xl mx-auto text-center mb-4 sm:mb-6 md:mb-8"
         >
-          <div className="inline-flex items-center justify-center gap-2 sm:gap-3 px-3 sm:px-4 py-1.5 rounded-full bg-primary/10 text-primary text-xs sm:text-sm font-medium mb-3">
+          <div className="inline-flex items-center justify-center gap-1 sm:gap-2 md:gap-3 px-2 sm:px-3 md:px-4 py-1 sm:py-1.5 rounded-full bg-primary/10 text-primary text-xs sm:text-sm font-medium mb-2 sm:mb-3">
             <BookOpen className="w-3 h-3 sm:w-4 sm:h-4" />
             <span>Your Personal Study Assistant</span>
           </div>
           
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-3 text-center text-black dark:text-white drop-shadow-lg flex items-center justify-center gap-2">
-            <Brain className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 text-primary" />
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold mb-2 sm:mb-3 text-center text-black dark:text-white drop-shadow-lg flex items-center justify-center gap-1 sm:gap-2">
+            <Brain className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 text-primary" />
             <span>Study Companion</span>
           </h1>
           
-          <p className="text-sm sm:text-base md:text-lg text-muted-foreground max-w-3xl mx-auto px-4">
+          <p className="text-xs sm:text-sm md:text-base lg:text-lg text-muted-foreground max-w-3xl mx-auto px-3 sm:px-4">
             Your comprehensive study toolkit with proven techniques, smart insights, and practical tools to enhance your learning journey.
           </p>
         </motion.div>
@@ -1534,55 +1537,55 @@ export default function StudyCompanionPage() {
           initial={{ opacity: 0, scale: 0.96, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ type: "spring", stiffness: 80, damping: 16 }}
-          className="w-full max-w-7xl mx-auto bg-white/60 dark:bg-neutral-900/60 rounded-2xl sm:rounded-3xl shadow-2xl p-4 sm:p-6 md:p-8 backdrop-blur-2xl border border-primary/30"
+          className="w-full max-w-7xl mx-auto bg-white/60 dark:bg-neutral-900/60 rounded-xl sm:rounded-2xl lg:rounded-3xl shadow-2xl p-3 sm:p-4 md:p-6 lg:p-8 backdrop-blur-2xl border border-primary/30"
           style={{ boxShadow: getBoxShadow() }}
         >
           <Tabs defaultValue="dashboard" className="w-full">
-            <TabsList className="grid grid-cols-3 lg:grid-cols-5 mb-6 sm:mb-8 h-auto p-1">
-              <TabsTrigger value="dashboard" className="text-xs sm:text-sm py-2 sm:py-3">
-                <BarChart3 className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+            <TabsList className="grid grid-cols-3 lg:grid-cols-5 mb-4 sm:mb-6 lg:mb-8 h-auto p-0.5 sm:p-1">
+              <TabsTrigger value="dashboard" className="text-xs sm:text-sm py-1.5 sm:py-2 lg:py-3 px-1 sm:px-2">
+                <BarChart3 className="w-3 h-3 sm:w-4 sm:h-4 mr-0.5 sm:mr-1 lg:mr-2" />
                 <span className="hidden sm:inline">Dashboard</span>
                 <span className="sm:hidden">Stats</span>
               </TabsTrigger>
-              <TabsTrigger value="quiz" className="text-xs sm:text-sm py-2 sm:py-3">
-                <HelpCircle className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+              <TabsTrigger value="quiz" className="text-xs sm:text-sm py-1.5 sm:py-2 lg:py-3 px-1 sm:px-2">
+                <HelpCircle className="w-3 h-3 sm:w-4 sm:h-4 mr-0.5 sm:mr-1 lg:mr-2" />
                 <span className="hidden sm:inline">Study Quiz</span>
                 <span className="sm:hidden">Quiz</span>
               </TabsTrigger>
-              <TabsTrigger value="planner" className="text-xs sm:text-sm py-2 sm:py-3">
-                <Timer className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+              <TabsTrigger value="planner" className="text-xs sm:text-sm py-1.5 sm:py-2 lg:py-3 px-1 sm:px-2">
+                <Timer className="w-3 h-3 sm:w-4 sm:h-4 mr-0.5 sm:mr-1 lg:mr-2" />
                 <span className="hidden sm:inline">Session Planner</span>
                 <span className="sm:hidden">Planner</span>
               </TabsTrigger>
-              <TabsTrigger value="techniques" className="text-xs sm:text-sm py-2 sm:py-3">
-                <BookOpen className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+              <TabsTrigger value="techniques" className="text-xs sm:text-sm py-1.5 sm:py-2 lg:py-3 px-1 sm:px-2">
+                <BookOpen className="w-3 h-3 sm:w-4 sm:h-4 mr-0.5 sm:mr-1 lg:mr-2" />
                 <span className="hidden sm:inline">Techniques</span>
                 <span className="sm:hidden">Learn</span>
               </TabsTrigger>
-              <TabsTrigger value="tools" className="text-xs sm:text-sm py-2 sm:py-3">
-                <Zap className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+              <TabsTrigger value="tools" className="text-xs sm:text-sm py-1.5 sm:py-2 lg:py-3 px-1 sm:px-2">
+                <Zap className="w-3 h-3 sm:w-4 sm:h-4 mr-0.5 sm:mr-1 lg:mr-2" />
                 <span className="hidden sm:inline">Quick Tools</span>
                 <span className="sm:hidden">Tools</span>
               </TabsTrigger>
             </TabsList>
             
-            <TabsContent value="dashboard" className="space-y-6 sm:space-y-8">
+            <TabsContent value="dashboard" className="space-y-4 sm:space-y-6 lg:space-y-8">
               <StudyInsightsDashboard tasks={tasks} />
             </TabsContent>
 
-            <TabsContent value="quiz" className="space-y-6 sm:space-y-8">
+            <TabsContent value="quiz" className="space-y-4 sm:space-y-6 lg:space-y-8">
               <StudyMethodQuiz />
             </TabsContent>
             
-            <TabsContent value="planner" className="space-y-6 sm:space-y-8">
+            <TabsContent value="planner" className="space-y-4 sm:space-y-6 lg:space-y-8">
               <StudySessionPlanner />
             </TabsContent>
             
-            <TabsContent value="techniques" className="space-y-6 sm:space-y-8">
+            <TabsContent value="techniques" className="space-y-4 sm:space-y-6 lg:space-y-8">
               <LearningTechniquesGuide />
             </TabsContent>
             
-            <TabsContent value="tools" className="space-y-6 sm:space-y-8">
+            <TabsContent value="tools" className="space-y-4 sm:space-y-6 lg:space-y-8">
               <QuickStudyTools />
             </TabsContent>
           </Tabs>

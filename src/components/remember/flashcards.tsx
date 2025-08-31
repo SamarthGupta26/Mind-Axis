@@ -25,8 +25,8 @@ export function Flashcards() {
 
   // Deck selection UI
   return (
-    <div className="space-y-8">
-      <div className="flex flex-wrap gap-2 items-center mb-4">
+    <div className="space-y-6 sm:space-y-8">
+      <div className="flex flex-wrap gap-2 sm:gap-3 items-center mb-3 sm:mb-4">
         {decks.map((deck) => (
           <Button
             key={deck.id}
@@ -40,12 +40,12 @@ export function Flashcards() {
                 setDeckMenuOpen(true);
               }
             }}
-            className="rounded-full px-4 interactive-glow"
+            className="rounded-full px-3 sm:px-4 py-1.5 sm:py-2 interactive-glow text-xs sm:text-sm md:text-base"
           >
             {deck.name}
           </Button>
         ))}
-        <Button variant="ghost" size="sm" onClick={() => setShowAddDeck(true)}>
+        <Button variant="ghost" size="sm" onClick={() => setShowAddDeck(true)} className="text-xs sm:text-sm md:text-base">
           + New Deck
         </Button>
       </div>
@@ -55,33 +55,33 @@ export function Flashcards() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 10 }}
-            className="liquid-card p-4 rounded-xl shadow-lg mb-4"
+            className="liquid-card p-3 sm:p-4 rounded-xl shadow-lg mb-3 sm:mb-4"
           >
             <input
               type="text"
               value={newDeckName}
               onChange={e => setNewDeckName(e.target.value)}
               placeholder="Deck name"
-              className="input bg-background/50 px-3 py-2 rounded-md w-64 mb-2"
+              className="input bg-background/50 px-3 py-2 rounded-md w-full sm:w-64 mb-2 text-sm sm:text-base"
             />
-            <div className="flex gap-2">
-              <Button size="sm" onClick={() => { addDeck(newDeckName); setNewDeckName(""); setShowAddDeck(false); }}>
+            <div className="flex flex-col sm:flex-row gap-2">
+              <Button size="sm" onClick={() => { addDeck(newDeckName); setNewDeckName(""); setShowAddDeck(false); }} className="order-1 text-xs sm:text-sm">
                 Add
               </Button>
-              <Button size="sm" variant="outline" onClick={() => setShowAddDeck(false)}>
+              <Button size="sm" variant="outline" onClick={() => setShowAddDeck(false)} className="order-2 text-xs sm:text-sm">
                 Cancel
               </Button>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
-  {selectedDeck && deckMenuOpen && decks.some(d => d.id === selectedDeck) && (
-        <div className="space-y-4">
-          <div className="flex gap-2 mb-2">
-            <Button size="sm" onClick={() => setShowAddCard(true)}>
+      {selectedDeck && deckMenuOpen && decks.some(d => d.id === selectedDeck) && (
+        <div className="space-y-3 sm:space-y-4">
+          <div className="flex flex-col sm:flex-row gap-2 mb-2">
+            <Button size="sm" onClick={() => setShowAddCard(true)} className="text-xs sm:text-sm md:text-base">
               + Add Card
             </Button>
-            <Button size="sm" variant="outline" onClick={() => { deleteDeck(selectedDeck); setSelectedDeck(null); }}>
+            <Button size="sm" variant="outline" onClick={() => { deleteDeck(selectedDeck); setSelectedDeck(null); }} className="text-xs sm:text-sm md:text-base">
               Delete Deck
             </Button>
           </div>
@@ -91,27 +91,27 @@ export function Flashcards() {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 10 }}
-                className="liquid-card p-4 rounded-xl shadow-lg mb-4"
+                className="liquid-card p-3 sm:p-4 rounded-xl shadow-lg mb-3 sm:mb-4"
               >
                 <input
                   type="text"
                   value={newFront}
                   onChange={e => setNewFront(e.target.value)}
                   placeholder="Front (Question)"
-                  className="input bg-background/50 px-3 py-2 rounded-md w-64 mb-2"
+                  className="input bg-background/50 px-3 py-2 rounded-md w-full mb-2 text-sm sm:text-base"
                 />
                 <input
                   type="text"
                   value={newBack}
                   onChange={e => setNewBack(e.target.value)}
                   placeholder="Back (Answer)"
-                  className="input bg-background/50 px-3 py-2 rounded-md w-64 mb-2"
+                  className="input bg-background/50 px-3 py-2 rounded-md w-full mb-2 text-sm sm:text-base"
                 />
-                <div className="flex gap-2">
-                  <Button size="sm" onClick={() => { addCard(selectedDeck, newFront, newBack); setNewFront(""); setNewBack(""); setShowAddCard(false); }}>
+                <div className="flex flex-col sm:flex-row gap-2">
+                  <Button size="sm" onClick={() => { addCard(selectedDeck, newFront, newBack); setNewFront(""); setNewBack(""); setShowAddCard(false); }} className="order-1 text-xs sm:text-sm">
                     Add
                   </Button>
-                  <Button size="sm" variant="outline" onClick={() => setShowAddCard(false)}>
+                  <Button size="sm" variant="outline" onClick={() => setShowAddCard(false)} className="order-2 text-xs sm:text-sm">
                     Cancel
                   </Button>
                 </div>
@@ -120,10 +120,10 @@ export function Flashcards() {
           </AnimatePresence>
           {/* Review UI */}
           {dueCards.length > 0 ? (
-            <div className="flex flex-col items-center gap-6">
-              <div className="relative w-80 h-56">
+            <div className="flex flex-col items-center gap-4 sm:gap-6">
+              <div className="relative w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl">
                 <motion.div
-                  className="liquid-card w-full h-full rounded-2xl shadow-2xl flex items-center justify-center cursor-pointer select-none relative border-2 border-primary/30"
+                  className="liquid-card w-full aspect-[4/3] sm:aspect-[5/3] md:aspect-[16/10] rounded-2xl shadow-2xl flex items-center justify-center cursor-pointer select-none relative border-2 border-primary/30"
                   onClick={() => setShowAnswer(a => !a)}
                   initial={false}
                   animate={{ background: showAnswer ? "rgba(34,197,94,0.08)" : "rgba(59,130,246,0.08)" }}
@@ -136,11 +136,11 @@ export function Flashcards() {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -20 }}
-                        className="flex flex-col items-center justify-center w-full h-full text-xl font-semibold px-6 text-center"
+                        className="flex flex-col items-center justify-center w-full h-full text-base sm:text-lg md:text-xl font-semibold px-3 sm:px-4 md:px-6 text-center"
                       >
-                        <span className="mb-2 text-primary/80">Question</span>
-                        {dueCards[reviewIndex]?.front}
-                        <span className="mt-4 text-xs text-muted-foreground">Click to reveal answer</span>
+                        <span className="mb-2 text-primary/80 text-sm sm:text-base">Question</span>
+                        <div className="break-words">{dueCards[reviewIndex]?.front}</div>
+                        <span className="mt-3 sm:mt-4 text-xs sm:text-sm text-muted-foreground">Click to reveal answer</span>
                       </motion.div>
                     ) : (
                       <motion.div
@@ -148,35 +148,35 @@ export function Flashcards() {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -20 }}
-                        className="flex flex-col items-center justify-center w-full h-full text-lg px-6 text-center"
+                        className="flex flex-col items-center justify-center w-full h-full text-sm sm:text-base md:text-lg px-3 sm:px-4 md:px-6 text-center"
                       >
-                        <span className="mb-2 text-green-600">Answer</span>
-                        {dueCards[reviewIndex]?.back}
-                        <span className="mt-4 text-xs text-muted-foreground">Click to go back</span>
+                        <span className="mb-2 text-green-600 text-sm sm:text-base">Answer</span>
+                        <div className="break-words">{dueCards[reviewIndex]?.back}</div>
+                        <span className="mt-3 sm:mt-4 text-xs sm:text-sm text-muted-foreground">Click to go back</span>
                       </motion.div>
                     )}
                   </AnimatePresence>
                 </motion.div>
               </div>
-              <div className="flex gap-2 mt-4 justify-center">
-                <Button size="sm" variant="outline" onClick={() => { reviewCard(dueCards[reviewIndex].id, 1); setShowAnswer(false); setReviewIndex(i => (i + 1) % dueCards.length); }}>
+              <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 mt-3 sm:mt-4 justify-center w-full max-w-sm">
+                <Button size="sm" variant="outline" onClick={() => { reviewCard(dueCards[reviewIndex].id, 1); setShowAnswer(false); setReviewIndex(i => (i + 1) % dueCards.length); }} className="text-xs sm:text-sm flex-1 sm:flex-none">
                   Hard
                 </Button>
-                <Button size="sm" variant="outline" onClick={() => { reviewCard(dueCards[reviewIndex].id, 2); setShowAnswer(false); setReviewIndex(i => (i + 1) % dueCards.length); }}>
+                <Button size="sm" variant="outline" onClick={() => { reviewCard(dueCards[reviewIndex].id, 2); setShowAnswer(false); setReviewIndex(i => (i + 1) % dueCards.length); }} className="text-xs sm:text-sm flex-1 sm:flex-none">
                   Medium
                 </Button>
-                <Button size="sm" variant="default" onClick={() => { reviewCard(dueCards[reviewIndex].id, 3); setShowAnswer(false); setReviewIndex(i => (i + 1) % dueCards.length); }}>
+                <Button size="sm" variant="default" onClick={() => { reviewCard(dueCards[reviewIndex].id, 3); setShowAnswer(false); setReviewIndex(i => (i + 1) % dueCards.length); }} className="text-xs sm:text-sm flex-1 sm:flex-none">
                   Easy
                 </Button>
               </div>
               <div className="flex justify-center mt-2">
-                <Button size="sm" variant="ghost" onClick={() => deleteCard(dueCards[reviewIndex].id)}>
+                <Button size="sm" variant="ghost" onClick={() => deleteCard(dueCards[reviewIndex].id)} className="text-xs sm:text-sm">
                   Delete Card
                 </Button>
               </div>
             </div>
           ) : (
-            <div className="text-center text-muted-foreground py-8 liquid-card rounded-xl shadow-lg">
+            <div className="text-center text-muted-foreground py-6 sm:py-8 liquid-card rounded-xl shadow-lg text-sm sm:text-base">
               No cards due for review. Add cards or check back later!
             </div>
           )}
@@ -184,12 +184,12 @@ export function Flashcards() {
       )}
 
       {/* Cramming Section */}
-      <div className="mt-12">
+      <div className="mt-8 sm:mt-10 md:mt-12">
         <motion.h2
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ type: 'spring', stiffness: 120, damping: 18 }}
-          className="text-3xl font-bold text-center mb-6 text-black dark:text-white"
+          className="text-xl sm:text-2xl md:text-3xl font-bold text-center mb-4 sm:mb-6 text-black dark:text-white"
         >
           Cramming
         </motion.h2>
@@ -197,17 +197,17 @@ export function Flashcards() {
           initial={{ opacity: 0, scale: 0.96, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ type: 'spring', stiffness: 80, damping: 16 }}
-          className="liquid-card p-6 rounded-xl shadow-lg mx-auto max-w-xl mb-6 text-center"
+          className="liquid-card p-3 sm:p-4 md:p-6 rounded-xl shadow-lg mx-auto max-w-xs sm:max-w-sm md:max-w-lg lg:max-w-xl mb-4 sm:mb-6 text-center"
           style={{ background: 'rgba(59,130,246,0.07)' }}
         >
-          <div className="text-lg font-semibold mb-2">How to use Cramming:</div>
-          <div className="text-base text-muted-foreground mb-2">Add questions and answers, then rate your recall:</div>
-          <div className="flex justify-center gap-2 mb-2 flex-wrap">
-            <span className="font-semibold px-3 py-1 rounded-md" style={{ background: '#ef4444', color: '#fff' }}>Red</span>
-            <span className="font-semibold px-3 py-1 rounded-md" style={{ background: '#facc15', color: '#fff' }}>Yellow</span>
-            <span className="font-semibold px-3 py-1 rounded-md" style={{ background: '#22c55e', color: '#fff' }}>Green</span>
+          <div className="text-sm sm:text-base md:text-lg font-semibold mb-2">How to use Cramming:</div>
+          <div className="text-xs sm:text-sm md:text-base text-muted-foreground mb-2">Add questions and answers, then rate your recall:</div>
+          <div className="flex justify-center gap-1 sm:gap-2 mb-2 flex-wrap">
+            <span className="font-semibold px-2 sm:px-3 py-1 rounded-md text-xs sm:text-sm" style={{ background: '#ef4444', color: '#fff' }}>Red</span>
+            <span className="font-semibold px-2 sm:px-3 py-1 rounded-md text-xs sm:text-sm" style={{ background: '#facc15', color: '#fff' }}>Yellow</span>
+            <span className="font-semibold px-2 sm:px-3 py-1 rounded-md text-xs sm:text-sm" style={{ background: '#22c55e', color: '#fff' }}>Green</span>
           </div>
-          <div className="text-base text-muted-foreground">Red = don’t know, Yellow = almost, Green = know it!<br />When all rows are green, you’re ready <span className="inline-block align-middle">✅</span></div>
+          <div className="text-xs sm:text-sm md:text-base text-muted-foreground">Red = don&apos;t know, Yellow = almost, Green = know it!<br />When all rows are green, you&apos;re ready <span className="inline-block align-middle">✅</span></div>
         </motion.div>
         {!cramActive ? (
           <motion.div
@@ -216,7 +216,7 @@ export function Flashcards() {
             transition={{ type: 'spring', stiffness: 80, damping: 16 }}
             className="flex justify-center"
           >
-            <Button size="lg" variant="default" onClick={() => setCramActive(true)} className="rounded-xl px-8 py-3 text-base font-semibold">Start Cramming</Button>
+            <Button size="lg" variant="default" onClick={() => setCramActive(true)} className="rounded-xl px-6 sm:px-8 py-2 sm:py-3 text-sm sm:text-base md:text-lg font-semibold">Start Cramming</Button>
           </motion.div>
         ) : (
           <CrammingSheet onAllGreen={() => { setCramActive(false); }} />
@@ -259,6 +259,7 @@ function CrammingSheet({ onAllGreen }: CrammingSheetProps) {
       onAllGreen();
     }
   }, [rows, onAllGreen]);
+  
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.96, y: 20 }}
@@ -267,7 +268,7 @@ function CrammingSheet({ onAllGreen }: CrammingSheetProps) {
       className="mt-4"
     >
       <div className="overflow-x-auto">
-        <div className="w-full max-w-3xl mx-auto">
+        <div className="w-full max-w-xs sm:max-w-sm md:max-w-2xl lg:max-w-4xl xl:max-w-6xl mx-auto">
           {rows.map(row => (
             <motion.div
               key={row.id}
@@ -275,7 +276,7 @@ function CrammingSheet({ onAllGreen }: CrammingSheetProps) {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -20, scale: 0.98 }}
               transition={{ type: 'spring', stiffness: 80, damping: 16 }}
-              className="flex flex-col md:flex-row items-center gap-2 md:gap-4 bg-white dark:bg-neutral-900 rounded-2xl shadow-xl mb-6 px-6 py-5 relative liquid-morph"
+              className="flex flex-col lg:flex-row items-stretch lg:items-center gap-2 lg:gap-4 bg-white dark:bg-neutral-900 rounded-2xl shadow-xl mb-4 sm:mb-6 px-3 sm:px-4 md:px-6 py-3 sm:py-4 md:py-5 relative liquid-morph"
               style={{
                 boxShadow:
                   '0 2px 32px 0 rgba(33,150,243,0.13), 0 0 0 0px ' +
@@ -296,50 +297,50 @@ function CrammingSheet({ onAllGreen }: CrammingSheetProps) {
                   filter: 'blur(12px)',
                 }}
               />
-              <div className="flex-1 w-full z-10">
+              <div className="flex-1 w-full z-10 mb-2 lg:mb-0">
                 <textarea
                   value={row.question}
                   onChange={e => updateRow(row.id, "question", e.target.value)}
-                  className="bg-background/50 px-4 py-3 rounded-md w-full text-base font-medium focus:border-primary/40 focus:ring-2 focus:ring-primary/20 transition-all min-w-0 resize-y"
+                  className="bg-background/50 px-3 sm:px-4 py-2 sm:py-3 rounded-md w-full text-sm sm:text-base font-medium focus:border-primary/40 focus:ring-2 focus:ring-primary/20 transition-all min-w-0 resize-y"
                   placeholder="Question"
                   rows={1}
-                  style={{ minWidth: 0, minHeight: '44px', maxHeight: '180px', overflow: 'auto' }}
+                  style={{ minWidth: 0, minHeight: '40px', maxHeight: '180px', overflow: 'auto' }}
                 />
               </div>
-              <div className="flex-1 w-full z-10">
+              <div className="flex-1 w-full z-10 mb-2 lg:mb-0">
                 {!row.revealed ? (
-                  <Button size="lg" variant="outline" onClick={() => reveal(row.id)} className="rounded-xl px-6 py-3 font-semibold text-base transition-all duration-200 hover:scale-105 hover:shadow-lg">Reveal</Button>
+                  <Button size="lg" variant="outline" onClick={() => reveal(row.id)} className="rounded-xl px-4 sm:px-6 py-2 sm:py-3 font-semibold text-sm sm:text-base transition-all duration-200 hover:scale-105 hover:shadow-lg w-full lg:w-auto">Reveal</Button>
                 ) : (
                   <textarea
                     value={row.answer}
                     onChange={e => updateRow(row.id, "answer", e.target.value)}
-                    className="bg-background/50 px-4 py-3 rounded-md w-full text-base font-medium focus:border-primary/40 focus:ring-2 focus:ring-primary/20 transition-all min-w-0 resize-y"
+                    className="bg-background/50 px-3 sm:px-4 py-2 sm:py-3 rounded-md w-full text-sm sm:text-base font-medium focus:border-primary/40 focus:ring-2 focus:ring-primary/20 transition-all min-w-0 resize-y"
                     placeholder="Answer"
                     rows={1}
-                    style={{ minWidth: 0, minHeight: '44px', maxHeight: '180px', overflow: 'auto' }}
+                    style={{ minWidth: 0, minHeight: '40px', maxHeight: '180px', overflow: 'auto' }}
                   />
                 )}
               </div>
-              <div className="flex gap-2 justify-center z-10">
+              <div className="flex flex-col sm:flex-row lg:flex-col xl:flex-row gap-1 sm:gap-2 justify-center z-10 w-full lg:w-auto">
                 <Button
-                  size="lg"
-                  className="rounded-xl px-6 py-3 font-semibold text-base transition-all duration-200 shadow-md hover:scale-105 hover:shadow-lg"
+                  size="sm"
+                  className="rounded-xl px-3 sm:px-4 lg:px-6 py-2 sm:py-3 font-semibold text-xs sm:text-sm lg:text-base transition-all duration-200 shadow-md hover:scale-105 hover:shadow-lg flex-1 sm:flex-none"
                   style={{ background: row.rating === "red" ? "#ef4444" : "#fff", color: row.rating === "red" ? "#fff" : "#ef4444" }}
                   onClick={() => setRating(row.id, "red")}
                 >
                   Red
                 </Button>
                 <Button
-                  size="lg"
-                  className="rounded-xl px-6 py-3 font-semibold text-base transition-all duration-200 shadow-md hover:scale-105 hover:shadow-lg"
+                  size="sm"
+                  className="rounded-xl px-3 sm:px-4 lg:px-6 py-2 sm:py-3 font-semibold text-xs sm:text-sm lg:text-base transition-all duration-200 shadow-md hover:scale-105 hover:shadow-lg flex-1 sm:flex-none"
                   style={{ background: row.rating === "yellow" ? "#facc15" : "#fff", color: row.rating === "yellow" ? "#fff" : "#facc15" }}
                   onClick={() => setRating(row.id, "yellow")}
                 >
                   Yellow
                 </Button>
                 <Button
-                  size="lg"
-                  className="rounded-xl px-6 py-3 font-semibold text-base transition-all duration-200 shadow-md hover:scale-105 hover:shadow-lg"
+                  size="sm"
+                  className="rounded-xl px-3 sm:px-4 lg:px-6 py-2 sm:py-3 font-semibold text-xs sm:text-sm lg:text-base transition-all duration-200 shadow-md hover:scale-105 hover:shadow-lg flex-1 sm:flex-none"
                   style={{ background: row.rating === "green" ? "#22c55e" : "#fff", color: row.rating === "green" ? "#fff" : "#22c55e" }}
                   onClick={() => setRating(row.id, "green")}
                 >
@@ -348,8 +349,8 @@ function CrammingSheet({ onAllGreen }: CrammingSheetProps) {
               </div>
             </motion.div>
           ))}
-          <div className="flex justify-center mt-2 mb-8">
-            <Button size="lg" variant="default" onClick={addRow} className="rounded-xl px-8 py-3 font-semibold text-base">+ Add Row</Button>
+          <div className="flex justify-center mt-4 sm:mt-6 mb-6 sm:mb-8">
+            <Button size="lg" variant="default" onClick={addRow} className="rounded-xl px-6 sm:px-8 py-2 sm:py-3 font-semibold text-sm sm:text-base md:text-lg">+ Add Row</Button>
           </div>
         </div>
       </div>

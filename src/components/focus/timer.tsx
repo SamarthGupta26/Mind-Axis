@@ -46,10 +46,10 @@ export function Timer() {
     <motion.div
       initial={{ scale: 0.95, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
-      className="flex flex-col items-center space-y-6 sm:space-y-8"
+      className="flex flex-col items-center space-y-4 sm:space-y-6 md:space-y-8"
     >
       <motion.div
-        className="relative w-48 h-48 sm:w-64 sm:h-64 flex items-center justify-center rounded-full liquid-card interactive-glow"
+        className="relative w-40 h-40 sm:w-48 sm:h-48 md:w-64 md:h-64 flex items-center justify-center rounded-full liquid-card interactive-glow"
         whileHover={{ scale: 1.02 }}
       >
         <motion.div
@@ -77,7 +77,7 @@ export function Timer() {
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: -10, opacity: 0 }}
               className={cn(
-                "text-4xl sm:text-5xl lg:text-6xl font-mono font-bold tracking-tighter",
+                "text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-mono font-bold tracking-tighter",
                 "text-black dark:text-white"
               )}
             >
@@ -87,15 +87,15 @@ export function Timer() {
         </motion.div>
       </motion.div>
 
-      <div className="flex items-center space-x-3 sm:space-x-4">
+      <div className="flex items-center space-x-2 sm:space-x-3 md:space-x-4">
         <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
           <Button
             variant="ghost"
             size="icon"
             onClick={resetTimer}
-            className="rounded-full liquid-card interactive-glow h-10 w-10 sm:h-12 sm:w-12"
+            className="rounded-full liquid-card interactive-glow h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12"
           >
-            <RotateCcw className="h-3 w-3 sm:h-4 sm:w-4" />
+            <RotateCcw className="h-3 w-3 sm:h-3 sm:w-3 md:h-4 md:w-4" />
           </Button>
         </motion.div>
 
@@ -104,12 +104,12 @@ export function Timer() {
             size="lg"
             onClick={isActive && !isPaused ? pauseTimer : startTimer}
             variant={isActive && !isPaused ? "outline" : "default"}
-            className="rounded-full min-w-[80px] sm:min-w-[100px] h-12 sm:h-14 text-sm sm:text-base interactive-glow"
+            className="rounded-full min-w-[60px] sm:min-w-[80px] md:min-w-[100px] h-10 sm:h-12 md:h-14 text-xs sm:text-sm md:text-base interactive-glow px-3 sm:px-4 md:px-6"
           >
             {isActive && !isPaused ? (
-              <Pause className="h-3 w-3 sm:h-4 sm:w-4 mr-2" />
+              <Pause className="h-3 w-3 sm:h-3 sm:w-3 md:h-4 md:w-4 mr-1 sm:mr-2" />
             ) : (
-              <Play className="h-3 w-3 sm:h-4 sm:w-4 mr-2" />
+              <Play className="h-3 w-3 sm:h-3 sm:w-3 md:h-4 md:w-4 mr-1 sm:mr-2" />
             )}
             {isActive && !isPaused ? 'Pause' : 'Start'}
           </Button>
@@ -120,9 +120,9 @@ export function Timer() {
             variant="ghost"
             size="icon"
             onClick={skipSession}
-            className="rounded-full liquid-card interactive-glow h-10 w-10 sm:h-12 sm:w-12"
+            className="rounded-full liquid-card interactive-glow h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12"
           >
-            <SkipForward className="h-3 w-3 sm:h-4 sm:w-4" />
+            <SkipForward className="h-3 w-3 sm:h-3 sm:w-3 md:h-4 md:w-4" />
           </Button>
         </motion.div>
       </div>

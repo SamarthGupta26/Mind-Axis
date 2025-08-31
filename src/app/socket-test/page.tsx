@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { getSocket } from "@/lib/socketClient";
 import { Button } from "@/components/ui/button";
 import { CheckCircle, XCircle, AlertCircle, Wifi, WifiOff } from "lucide-react";
@@ -41,7 +41,7 @@ export default function SocketTestPage() {
     setLogs(prev => [...prev.slice(-9), `${new Date().toLocaleTimeString()}: ${message}`]);
   };
 
-  const testHealthEndpoint = async () => {
+  const testHealthEndpoint = useCallback(async () => {
     try {
       const response = await fetch('/api/socket-health');
       const data = await response.json();
@@ -51,7 +51,7 @@ export default function SocketTestPage() {
       addLog(`Health check failed: ${error}`);
       setHealthCheck({ error: error instanceof Error ? error : new Error(String(error)) });
     }
-  };
+  }, []);
 
   const testSocketConnection = () => {
     addLog('Starting Socket.IO connection test...');
@@ -95,7 +95,7 @@ export default function SocketTestPage() {
 
   useEffect(() => {
     testHealthEndpoint();
-  }, []);
+  }, [testHealthEndpoint]);
 
   const getStatusBadge = () => {
     const baseClasses = "inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold";

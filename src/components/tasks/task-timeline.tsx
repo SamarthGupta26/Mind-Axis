@@ -47,7 +47,7 @@ export function TaskTimeline({ tasks, onTaskComplete }: TaskTimelineProps) {
   }, [tasks, today]);
 
   return (
-    <div className="space-y-10 px-4 sm:px-8 lg:px-16">
+    <div className="space-y-6 sm:space-y-8 md:space-y-10 lg:space-y-12 px-1 sm:px-2 md:px-4 lg:px-8 xl:px-16">
       {Array.from({ length: daysToShow }).map((_, index) => {
         const date = addDays(today, index);
         const dateKey = format(date, 'yyyy-MM-dd');
@@ -63,11 +63,11 @@ export function TaskTimeline({ tasks, onTaskComplete }: TaskTimelineProps) {
             className="relative"
           >
             <div className={cn(
-              "sticky top-20 z-10 -ml-4 sm:-ml-6 mb-4 backdrop-blur-lg p-4 sm:p-6 rounded-r-2xl border-l-4 border bg-background/80",
+              "sticky top-20 z-10 -ml-2 sm:-ml-3 md:-ml-4 lg:-ml-6 mb-3 sm:mb-4 md:mb-5 lg:mb-6 backdrop-blur-lg p-3 sm:p-4 md:p-5 lg:p-6 rounded-r-2xl border-l-4 border bg-background/80",
               isToday ? "border-primary shadow-lg" : "border-border"
             )}>
               <h3 className={cn(
-                "text-xl font-bold tracking-tight",
+                "text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl font-bold tracking-tight",
                 isToday ? "text-primary" : "text-foreground"
               )}>
                 {isToday ? "Today" : format(date, 'EEEE, MMMM d')}
@@ -78,7 +78,7 @@ export function TaskTimeline({ tasks, onTaskComplete }: TaskTimelineProps) {
               {dayTasks.length > 0 ? (
                 <motion.div 
                   layout
-                  className="space-y-3 pl-4 sm:pl-8"
+                  className="space-y-2 sm:space-y-3 md:space-y-4 pl-2 sm:pl-4 md:pl-6 lg:pl-8"
                 >
                   {dayTasks.map(task => (
                     <motion.div
@@ -88,20 +88,20 @@ export function TaskTimeline({ tasks, onTaskComplete }: TaskTimelineProps) {
                       animate={{ opacity: 1, x: 0 }}
                       exit={{ opacity: 0, x: 20 }}
                       className={cn(
-                        "group flex items-start gap-4 p-4 rounded-xl hover:bg-primary/10 transition-colors border border-transparent hover:border-primary/30 shadow-sm"
+                        "group flex items-start gap-2 sm:gap-3 md:gap-4 p-3 sm:p-4 md:p-5 lg:p-6 rounded-xl hover:bg-primary/10 transition-colors border border-transparent hover:border-primary/30 shadow-sm"
                       )}
                     >
                       <Checkbox
                         id={task.id}
                         checked={task.completed}
                         onCheckedChange={() => onTaskComplete(task.id)}
-                        className="mt-1"
+                        className="mt-0.5 sm:mt-1"
                       />
                       <div className="flex-1 min-w-0">
                         <label
                           htmlFor={task.id}
                           className={cn(
-                            "text-base font-semibold leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70",
+                            "text-sm sm:text-base md:text-lg font-semibold leading-tight cursor-pointer peer-disabled:cursor-not-allowed peer-disabled:opacity-70",
                             task.completed && "line-through text-muted-foreground"
                           )}
                         >
@@ -109,7 +109,7 @@ export function TaskTimeline({ tasks, onTaskComplete }: TaskTimelineProps) {
                         </label>
                         {task.description && (
                           <p className={cn(
-                            "text-sm text-muted-foreground mt-1",
+                            "text-xs sm:text-sm md:text-base text-muted-foreground mt-1 sm:mt-1.5 md:mt-2 leading-relaxed",
                             task.completed && "line-through"
                           )}>
                             {task.description}
@@ -123,9 +123,9 @@ export function TaskTimeline({ tasks, onTaskComplete }: TaskTimelineProps) {
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  className="pl-4 sm:pl-8 py-6"
+                  className="pl-2 sm:pl-4 md:pl-6 lg:pl-8 py-4 sm:py-5 md:py-6"
                 >
-                  <p className="text-base text-muted-foreground">No tasks for this day</p>
+                  <p className="text-sm sm:text-base md:text-lg text-muted-foreground">No tasks for this day</p>
                 </motion.div>
               )}
             </AnimatePresence>

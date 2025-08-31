@@ -39,11 +39,6 @@ export function ParticipantsPanel({ users, currentUserId, roomId, onRename }: Pa
     setNewName("");
   };
 
-  const formatTime = (timestamp: Date) => {
-    const date = new Date(timestamp);
-    return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-  };
-
   const formatDuration = (timestamp: Date) => {
     const minutes = Math.floor((Date.now() - new Date(timestamp).getTime()) / (1000 * 60));
     if (minutes < 1) return "Just joined";
@@ -53,40 +48,40 @@ export function ParticipantsPanel({ users, currentUserId, roomId, onRename }: Pa
   };
 
   return (
-    <div className="liquid-card rounded-xl p-6 h-full flex flex-col">
+    <div className="liquid-card rounded-xl p-3 sm:p-4 md:p-6 h-full flex flex-col">
       {/* Header */}
-      <div className="flex items-center justify-between mb-6">
-        <div className="flex items-center gap-3">
-          <Users className="w-5 h-5 text-primary" />
-          <h2 className="text-lg font-semibold">Participants</h2>
-          <span className="text-sm text-muted-foreground bg-primary/10 px-2 py-1 rounded-full">
+      <div className="flex items-center justify-between mb-3 sm:mb-4 md:mb-6">
+        <div className="flex items-center gap-2 sm:gap-3">
+          <Users className="w-4 h-4 sm:w-5 sm:h-5 text-primary" />
+          <h2 className="text-base sm:text-lg font-semibold">Participants</h2>
+          <span className="text-xs sm:text-sm text-muted-foreground bg-primary/10 px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full">
             {users.length}
           </span>
         </div>
       </div>
 
       {/* Invite Link */}
-      <div className="mb-6">
+      <div className="mb-3 sm:mb-4 md:mb-6">
         <Button
           onClick={copyInviteLink}
           variant="outline"
-          className="w-full justify-center gap-2 h-10 border-primary/20 hover:border-primary/40 hover:bg-primary/5"
+          className="w-full justify-center gap-1 sm:gap-2 h-8 sm:h-10 border-primary/20 hover:border-primary/40 hover:bg-primary/5 text-xs sm:text-sm"
         >
-          <Copy className="w-4 h-4" />
+          <Copy className="w-3 h-3 sm:w-4 sm:h-4" />
           {showCopied ? "Copied!" : "Copy Invite Link"}
         </Button>
       </div>
 
       {/* Room Code Display */}
-      <div className="mb-6 p-3 bg-primary/5 rounded-lg text-center">
-        <div className="text-xs text-muted-foreground mb-1">Room Code</div>
-        <div className="font-mono text-lg font-bold text-primary tracking-widest">
+      <div className="mb-3 sm:mb-4 md:mb-6 p-2 sm:p-3 bg-primary/5 rounded-lg text-center">
+        <div className="text-xs text-muted-foreground mb-0.5 sm:mb-1">Room Code</div>
+        <div className="font-mono text-sm sm:text-lg font-bold text-primary tracking-widest">
           {roomId.toUpperCase()}
         </div>
       </div>
 
       {/* Participants List */}
-      <div className="flex-1 space-y-3 overflow-y-auto">
+      <div className="flex-1 space-y-2 sm:space-y-3 overflow-y-auto">
         <AnimatePresence>
           {sortedUsers.map((user, index) => {
             const isCurrentUser = user.id === currentUserId;
@@ -99,25 +94,25 @@ export function ParticipantsPanel({ users, currentUserId, roomId, onRename }: Pa
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.2 }}
-                className={`p-3 rounded-lg border transition-all duration-200 ${
+                className={`p-2 sm:p-3 rounded-lg border transition-all duration-200 ${
                   isCurrentUser 
                     ? "border-primary bg-primary/5" 
                     : "border-border/50 hover:border-border"
                 }`}
               >
                 <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-3 min-w-0 flex-1">
+                  <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
                     <div className="relative">
-                      <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center">
-                        <Users className="w-4 h-4 text-primary" />
+                      <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-primary/20 flex items-center justify-center">
+                        <Users className="w-3 h-3 sm:w-4 sm:h-4 text-primary" />
                       </div>
                       {isHost && (
-                        <Crown className="w-3 h-3 text-yellow-500 absolute -top-1 -right-1" />
+                        <Crown className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-yellow-500 absolute -top-0.5 sm:-top-1 -right-0.5 sm:-right-1" />
                       )}
                     </div>
                     
                     <div className="min-w-0 flex-1">
-                      <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-1 sm:gap-2">
                         {editingName && isCurrentUser ? (
                           <input
                             type="text"
@@ -125,14 +120,14 @@ export function ParticipantsPanel({ users, currentUserId, roomId, onRename }: Pa
                             onChange={(e) => setNewName(e.target.value)}
                             onKeyPress={(e) => e.key === "Enter" && handleRename()}
                             onBlur={handleRename}
-                            className="bg-background border border-primary rounded px-2 py-1 text-sm font-medium w-full"
+                            className="bg-background border border-primary rounded px-1.5 sm:px-2 py-0.5 sm:py-1 text-xs sm:text-sm font-medium w-full"
                             placeholder={user.name}
                             autoFocus
                             maxLength={20}
                           />
                         ) : (
                           <div 
-                            className={`font-medium truncate ${
+                            className={`text-xs sm:text-sm font-medium truncate ${
                               isCurrentUser ? "text-primary cursor-pointer" : ""
                             }`}
                             onClick={() => {
@@ -153,14 +148,14 @@ export function ParticipantsPanel({ users, currentUserId, roomId, onRename }: Pa
                         )}
                       </div>
                       
-                      <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                        <Clock className="w-3 h-3" />
+                      <div className="flex items-center gap-1 sm:gap-2 text-xs text-muted-foreground">
+                        <Clock className="w-2.5 h-2.5 sm:w-3 sm:h-3" />
                         <span>{formatDuration(user.joinedAt)}</span>
                       </div>
                     </div>
                   </div>
 
-                  <div className="w-2 h-2 bg-green-500 rounded-full" />
+                  <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-green-500 rounded-full" />
                 </div>
               </motion.div>
             );
@@ -169,7 +164,7 @@ export function ParticipantsPanel({ users, currentUserId, roomId, onRename }: Pa
       </div>
 
       {/* Footer Info */}
-      <div className="mt-4 pt-4 border-t border-border/50">
+      <div className="mt-3 sm:mt-4 pt-3 sm:pt-4 border-t border-border/50">
         <div className="text-xs text-muted-foreground text-center">
           {currentUser && "Click your name to rename"}
         </div>

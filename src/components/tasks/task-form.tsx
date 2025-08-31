@@ -55,66 +55,74 @@ export function TaskForm({ task, mode, onClose }: TaskFormProps) {
       <DialogTrigger asChild>
         <Button 
           variant={mode === 'create' ? 'default' : 'ghost'} 
-          size={mode === 'create' ? 'lg' : 'default'}
-          className={mode === 'create' ? 'rounded-full shadow-lg hover:shadow-xl transition-shadow duration-200' : ''}
+          size={mode === 'create' ? 'default' : 'default'}
+          className={`${mode === 'create' 
+            ? 'rounded-full shadow-lg hover:shadow-xl transition-shadow duration-200 text-xs sm:text-sm md:text-base px-3 sm:px-4 md:px-6 py-1.5 sm:py-2 md:py-3 h-8 sm:h-9 md:h-auto' 
+            : 'text-sm sm:text-base'
+          }`}
         >
-          {mode === 'create' ? 'Add New Task' : 'Edit'}
+          {mode === 'create' ? (
+            <>
+              <span className="hidden sm:inline">Add New Task</span>
+              <span className="sm:hidden">Add Task</span>
+            </>
+          ) : 'Edit'}
         </Button>
       </DialogTrigger>
-      <DialogContent className="max-w-[95vw] sm:max-w-[800px] p-4 sm:p-6 overflow-hidden bg-background/95">
+      <DialogContent className="max-w-[95vw] sm:max-w-[90vw] md:max-w-[80vw] lg:max-w-[70vw] xl:max-w-[800px] p-3 sm:p-4 md:p-5 lg:p-6 overflow-hidden bg-background/95 max-h-[90vh] overflow-y-auto">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-background pointer-events-none" />
         <div className="absolute inset-0 bg-background/80 backdrop-blur-xl pointer-events-none" />
         <div className="relative z-10">
-          <DialogHeader className="space-y-2 pb-4">
-            <DialogTitle className="text-lg sm:text-xl bg-gradient-to-r from-primary to-primary/50 bg-clip-text text-transparent">
+          <DialogHeader className="space-y-2 pb-3 sm:pb-4">
+            <DialogTitle className="text-base sm:text-lg md:text-xl lg:text-2xl bg-gradient-to-r from-primary to-primary/50 bg-clip-text text-transparent">
               {mode === 'create' ? 'Create Task' : 'Edit Task'}
             </DialogTitle>
-            <p className="text-muted-foreground text-sm">
+            <p className="text-muted-foreground text-xs sm:text-sm md:text-base">
               {mode === 'create' 
                 ? 'Break down your work into manageable tasks.'
                 : 'Update your task details to stay on track.'}
             </p>
           </DialogHeader>
-          <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-6">
+          <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5 md:gap-6">
             <div className="space-y-2">
-              <Label htmlFor="title">Task Title</Label>
+              <Label htmlFor="title" className="text-sm sm:text-base">Task Title</Label>
               <Input
                 id="title"
                 placeholder="E.g., Complete Math Exercise 7.5"
                 value={formData.title}
                 onChange={(e) => setFormData({ ...formData, title: e.target.value })}
                 required
-                className="h-10 bg-background/50 backdrop-blur-sm"
+                className="h-10 sm:h-11 md:h-12 bg-background/50 backdrop-blur-sm text-sm sm:text-base"
               />
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="description">Description</Label>
+              <Label htmlFor="description" className="text-sm sm:text-base">Description</Label>
               <Textarea
                 id="description"
                 placeholder="Add any important details..."
                 value={formData.description}
                 onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                 rows={2}
-                className="bg-background/50 backdrop-blur-sm resize-none"
+                className="bg-background/50 backdrop-blur-sm resize-none text-sm sm:text-base"
               />
             </div>
 
             {/* Removed priority field */}
 
-            <div className="space-y-2 col-span-1">
-              <Label>Subject</Label>
+            <div className="space-y-2 col-span-1 md:col-span-2">
+              <Label className="text-sm sm:text-base">Subject</Label>
               <RadioGroup
                 value={formData.category}
                 onValueChange={(value) => setFormData({ ...formData, category: value })}
-                className="flex flex-wrap gap-4"
+                className="flex flex-wrap gap-2 sm:gap-3 md:gap-4"
               >
                 {categories.map((category) => (
-                  <div key={category} className="flex items-center space-x-2">
+                  <div key={category} className="flex items-center space-x-1.5 sm:space-x-2">
                     <RadioGroupItem value={category} id={category} />
                     <Label 
                       htmlFor={category} 
-                      className="text-sm px-2 py-0.5 rounded bg-primary/5"
+                      className="text-xs sm:text-sm px-2 py-0.5 rounded bg-primary/5"
                     >
                       {category}
                     </Label>
@@ -124,7 +132,7 @@ export function TaskForm({ task, mode, onClose }: TaskFormProps) {
             </div>
 
             <div className="space-y-2 col-span-1">
-              <Label htmlFor="dueDate">Due Date (Optional)</Label>
+              <Label htmlFor="dueDate" className="text-sm sm:text-base">Due Date (Optional)</Label>
               <div className="relative">
                 <Input
                   id="dueDate"
@@ -132,14 +140,14 @@ export function TaskForm({ task, mode, onClose }: TaskFormProps) {
                   value={formData.dueDate || ''}
                   min={new Date().toISOString().split('T')[0]}
                   onChange={(e) => setFormData({ ...formData, dueDate: e.target.value || undefined })}
-                  className="pl-10 h-10 bg-background/50 backdrop-blur-sm"
+                  className="pl-8 sm:pl-10 h-10 sm:h-11 md:h-12 bg-background/50 backdrop-blur-sm text-sm sm:text-base"
                 />
-                <Calendar className="absolute left-3 top-2.5 h-5 w-5 text-muted-foreground" />
+                <Calendar className="absolute left-2 sm:left-3 top-2.5 sm:top-3 h-4 w-4 sm:h-5 sm:w-5 text-muted-foreground" />
               </div>
             </div>
 
             <motion.div 
-              className="flex justify-end gap-3 col-span-2"
+              className="flex flex-col sm:flex-row justify-end gap-2 sm:gap-3 col-span-1 md:col-span-2"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
@@ -148,13 +156,13 @@ export function TaskForm({ task, mode, onClose }: TaskFormProps) {
                 type="button" 
                 variant="outline" 
                 onClick={() => setOpen(false)}
-                className="px-4"
+                className="w-full sm:w-auto px-4 order-2 sm:order-1"
               >
                 Cancel
               </Button>
               <Button 
                 type="submit"
-                className="px-4 bg-primary/90 hover:bg-primary"
+                className="w-full sm:w-auto px-4 bg-primary/90 hover:bg-primary order-1 sm:order-2"
               >
                 {mode === 'create' ? 'Create Task' : 'Save Changes'}
               </Button>

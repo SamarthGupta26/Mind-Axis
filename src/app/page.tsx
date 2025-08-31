@@ -5,7 +5,6 @@ import { ArrowRight, BookOpen, Brain, CheckCircle, Focus, Target, Users, X, Play
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { useTaskStore } from '@/store/task-store';
-import { QuickNotesSidebar } from '@/components/ui/quick-notes-sidebar';
 import * as React from 'react';
 
 // Set page title
@@ -112,20 +111,21 @@ export default function Home() {
 
   return (
     <MotionConfig reducedMotion="user">
-      <QuickNotesSidebar />
-      <div className="container px-4 py-16 sm:py-24 md:py-32">
-        <div className="max-w-4xl mx-auto text-center space-y-6 sm:space-y-8">
+      <div className="min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8">
+        <div className="w-full max-w-7xl mx-auto">
+          <div className="container px-4 py-8 sm:py-12 md:py-16 lg:py-24">
+            <div className="max-w-4xl mx-auto text-center space-y-6 sm:space-y-8 lg:space-y-10">
           {/* Streak indicator */}
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="mb-6 sm:mb-8 flex flex-col items-center justify-center"
+            className="mb-6 sm:mb-8 lg:mb-10 flex flex-col items-center justify-center"
           >
-            <span className="inline-block px-4 sm:px-6 py-2 rounded-full liquid-card font-bold text-base sm:text-lg shadow-lg text-primary interactive-glow will-change-transform">
+            <span className="inline-block px-4 sm:px-6 lg:px-8 py-2 sm:py-3 rounded-full liquid-card font-bold text-sm sm:text-base lg:text-lg shadow-lg text-primary interactive-glow will-change-transform">
               🔥 Streak: {streak} day{streak === 1 ? '' : 's'}
             </span>
-            <span className="text-xs sm:text-sm text-muted-foreground mt-2 px-4 text-center">Complete tasks daily to keep your streak alive!</span>
+            <span className="text-xs sm:text-sm lg:text-base text-muted-foreground mt-2 sm:mt-3 px-4 text-center max-w-xs sm:max-w-sm lg:max-w-md">Complete tasks daily to keep your streak alive!</span>
           </motion.div>
           
           <motion.div
@@ -139,7 +139,7 @@ export default function Home() {
                 animate={{ opacity: 1, scale: 1, y: 0, filter: 'blur(0px)' }}
                 transition={{ type: 'spring', stiffness: 70, damping: 18 }}
                 onSubmit={handleNameSubmit}
-                className="relative w-full max-w-sm sm:max-w-md mx-auto px-6 py-8 sm:py-10 md:py-14 flex flex-col items-center gap-5 sm:gap-7 rounded-2xl sm:rounded-3xl liquid-card will-change-transform"
+                className="relative w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 md:py-10 lg:py-12 flex flex-col items-center gap-4 sm:gap-5 lg:gap-6 rounded-2xl sm:rounded-3xl liquid-card will-change-transform"
                 style={{ transform: 'translateZ(0)' }}
               >
                 {/* Liquid glass animated background */}
@@ -193,19 +193,19 @@ export default function Home() {
               <>
                 <motion.h1
                   variants={fadeInUp}
-                  className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight px-4"
+                  className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-bold tracking-tight px-2 sm:px-4 leading-tight"
                 >
                   {greeting}
                 </motion.h1>
                 <motion.p
                   variants={fadeInUp}
-                  className="text-base sm:text-lg md:text-xl text-muted-foreground px-4 max-w-3xl mx-auto"
+                  className="text-sm sm:text-base md:text-lg lg:text-xl text-muted-foreground px-2 sm:px-4 max-w-xs sm:max-w-sm md:max-w-2xl lg:max-w-3xl xl:max-w-4xl mx-auto leading-relaxed"
                 >
                   A simple, focused study app designed to help students manage their daily learning and ace exams  — without distractions or complexity.
                 </motion.p>
                 <motion.div
                   variants={fadeInUp}
-                  className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-4 max-w-md sm:max-w-none mx-auto"
+                  className="flex flex-col sm:flex-row gap-3 sm:gap-4 lg:gap-6 justify-center px-2 sm:px-4 max-w-xs sm:max-w-md lg:max-w-lg xl:max-w-xl mx-auto"
                 >
                   <Button size="lg" asChild className="w-full sm:w-auto">
                     <Link href="/tasks">
@@ -227,6 +227,8 @@ export default function Home() {
 
         {/* Interactive Guide Section */}
         {mounted && !showOnboarding && <InteractiveGuide />}
+          </div>
+        </div>
       </div>
     </MotionConfig>
   );
@@ -320,19 +322,19 @@ const InteractiveGuide = React.memo(function InteractiveGuide() {
       initial={{ opacity: 0, y: 40 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ type: 'spring', stiffness: 80, damping: 16, delay: 0.3 }}
-      className="mt-16 sm:mt-24 max-w-6xl mx-auto"
+      className="mt-12 sm:mt-16 md:mt-20 lg:mt-24 xl:mt-32 w-full"
     >
       {/* Guide Header */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ type: 'spring', stiffness: 120, damping: 18, delay: 0.5 }}
-        className="text-center mb-8 sm:mb-12"
+        className="text-center mb-6 sm:mb-8 md:mb-10 lg:mb-12 px-2 sm:px-4"
       >
-        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-black dark:text-white mb-4">
+        <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-black dark:text-white mb-3 sm:mb-4 lg:mb-6">
           Your Study Journey Awaits
         </h2>
-        <p className="text-base sm:text-lg text-muted-foreground mb-6 max-w-2xl mx-auto px-4">
+        <p className="text-sm sm:text-base md:text-lg lg:text-xl text-muted-foreground mb-4 sm:mb-6 lg:mb-8 max-w-xs sm:max-w-sm md:max-w-lg lg:max-w-2xl xl:max-w-3xl mx-auto px-2 sm:px-4 leading-relaxed">
           Discover how Mind Axis can transform your learning experience with these powerful features
         </p>
         
@@ -362,7 +364,7 @@ const InteractiveGuide = React.memo(function InteractiveGuide() {
       {/* Guide Steps Grid */}
       <motion.div
         layout
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 px-4"
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-3 sm:gap-4 md:gap-5 lg:gap-6 px-2 sm:px-4 lg:px-6 xl:px-8"
       >
         {guideSteps.map((step, index) => {
           const Icon = step.icon;
@@ -387,7 +389,7 @@ const InteractiveGuide = React.memo(function InteractiveGuide() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6 }}
-          className="flex justify-center items-center mt-8 space-x-3"
+          className="flex justify-center items-center mt-6 sm:mt-8 lg:mt-10 space-x-2 sm:space-x-3 px-4"
         >
           {guideSteps.map((_, index) => (
             <motion.button
