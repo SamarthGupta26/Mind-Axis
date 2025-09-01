@@ -42,6 +42,12 @@ vercel --prod
 - `NEXT_PUBLIC_APP_URL`: `https://mind-axis.vercel.app`
 - `NODE_ENV`: `production`
 
+## 📦 Package Manager:
+- **Using**: pnpm 10.15.0 (configured in package.json)
+- **Lock File**: pnpm-lock.yaml (optimized for faster installs)
+- **Build Command**: `pnpm run build`
+- **Install Command**: `pnpm install`
+
 ## 🎯 Features Now Working:
 - ✅ **Study Rooms** - Real-time collaboration with Socket.IO
 - ✅ **Live Chat** - Instant messaging between participants
@@ -52,9 +58,10 @@ vercel --prod
 
 ## 🔧 Technical Stack:
 - **Framework**: Next.js 15.5.0
+- **Package Manager**: pnpm 10.15.0 (faster, efficient)
 - **Real-time**: Socket.IO with polling transport
 - **Styling**: Tailwind CSS + Framer Motion
 - **Deployment**: Vercel with serverless functions
-- **Package Manager**: npm (for Vercel compatibility)
+- **Lock File**: pnpm-lock.yaml for consistent installs
 
 The deployment is now fully optimized for Vercel and all Study Rooms functionality will work perfectly! 🎉
