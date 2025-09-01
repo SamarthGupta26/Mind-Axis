@@ -1,17 +1,4 @@
 {
-  "version": 2,
-  "framework": "nextjs",
   "buildCommand": "pnpm run build",
-  "installCommand": "pnpm install",
-  "functions": {
-    "pages/api/**/*.ts": {
-      "runtime": "nodejs18.x"
-    }
-  },
-  "routes": [
-    {
-      "src": "/api/socketio",
-      "dest": "/api/socketio"
-    }
-  ]
+  "installCommand": "pnpm install"
 }
