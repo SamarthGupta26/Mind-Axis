@@ -48,6 +48,21 @@ export default function RoomPage() {
   const [typingUsers, setTypingUsers] = useState<Array<{ userId: string; userName: string }>>([]);
   const [activeTab, setActiveTab] = useState<'chat' | 'timer'>('chat');
 
+  // Validate room ID after hooks are initialized
+  useEffect(() => {
+    if (!roomId) {
+      console.error('No room ID provided');
+      router.push('/rooms');
+      return;
+    }
+    
+    if (typeof roomId !== 'string' || roomId.length !== 8) {
+      console.error('Invalid room ID format:', roomId);
+      router.push('/rooms');
+      return;
+    }
+  }, [roomId, router]);
+
   // Initialize socket and user
   useEffect(() => {
     if (!roomId) {

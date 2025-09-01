@@ -59,28 +59,40 @@ let socket: Socket<ServerToClientEvents, ClientToServerEvents> | null = null;
 
 export function getSocket(): Socket<ServerToClientEvents, ClientToServerEvents> {
   if (!socket) {
-    // Use current window location to avoid port conflicts
-    const serverUrl = process.env.NODE_ENV === 'production' 
-      ? process.env.NEXT_PUBLIC_APP_URL || window.location.origin
-      : window.location.origin;
+    // Get the appropriate server URL based on environment
+    let serverUrl: string;
+    
+    if (typeof window !== 'undefined') {
+      if (process.env.NODE_ENV === 'production') {
+        // For Vercel deployment, use the current origin
+        serverUrl = window.location.origin;
+      } else {
+        // For local development
+        serverUrl = window.location.origin;
+      }
+    } else {
+      // Server-side fallback
+      serverUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
+    }
     
     console.log('🚀 Initializing Socket.IO connection to:', serverUrl);
     
     socket = io(serverUrl, {
       path: '/api/socketio',
-      // Use only polling for maximum compatibility with Next.js
+      // Use polling for maximum Vercel compatibility
       transports: ['polling'],
       autoConnect: true,
       forceNew: false,
       reconnection: true,
       reconnectionAttempts: 5,
-      reconnectionDelay: 2000,
-      reconnectionDelayMax: 10000,
-      timeout: 20000, // Reduced timeout
-      upgrade: false, // Disable WebSocket upgrade
-      // Additional options for reliability
+      reconnectionDelay: 1000,
+      reconnectionDelayMax: 5000,
+      timeout: 20000,
+      upgrade: false,
+      // Additional Vercel-specific options
       rememberUpgrade: false,
       closeOnBeforeunload: true,
+      withCredentials: true
     });
 
     // Connection event logging with better error details

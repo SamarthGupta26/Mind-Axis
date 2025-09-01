@@ -51,15 +51,19 @@ export default function handler(req: NextApiRequest, res: NextApiResponseServerI
   const io = new SocketIOServer(httpServer, {
     path: '/api/socketio',
     cors: {
-      origin: "*",
+      origin: process.env.NODE_ENV === 'production' 
+        ? ["https://mind-axis.vercel.app", "https://www.mind-axis.vercel.app", process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : ""]
+        : ["http://localhost:3000", "http://127.0.0.1:3000"],
       methods: ["GET", "POST"],
-      credentials: false
+      credentials: true
     },
-    // Simplified configuration for better Next.js compatibility
-    transports: ['polling'], // Use only polling to avoid WebSocket upgrade issues
+    // Optimized for Vercel serverless functions
+    transports: ['polling'],
     allowEIO3: true,
     pingTimeout: 60000,
     pingInterval: 25000,
+    connectTimeout: 45000,
+    maxHttpBufferSize: 1e6
   });
 
   // Helper function to get or create room
